@@ -51,10 +51,6 @@ export class AuthService {
     return this.http.get<any>(this.endpoint + 'logout', this.httpOptions);
   }
 
-  public getAllSurveyList(): Observable<any> {
-    return this.http.get<any>(this.endpoint + 'survey', this.httpOptions);
-  }
-
   public loggedIn(): boolean {
     return !this.jwtService.isTokenExpired(this.authToken);
   }

@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
     this.user = new User();
   }
 
-  isLoggedIn(): void {
+  isLoggedIn(): boolean {
     const result = this.authService.loggedIn();
     if (result) {
       this.user = JSON.parse(localStorage.getItem('user'));
