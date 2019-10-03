@@ -1,8 +1,4 @@
 
-
-let express = require("express");
-let router = express.Router();
-let mongoose = require("mongoose");
 let passport = require("passport");
 
 let jwt = require("jsonwebtoken");
@@ -76,7 +72,7 @@ module.exports.processRegisterPage = (req, res, next) => {
     } else {
       // if no error exists, then registration is successful
 
-      // redirect the user
+      // return succes message
       return res.json({ success: true, msg: "User Registered Successfully!" });
     }
   });
