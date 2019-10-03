@@ -30,4 +30,11 @@ export class HeaderComponent implements OnInit {
     }
     return result;
   }
+
+  onLogoutClick(): void {
+    this.authService.logout().subscribe(data => {
+      this.flashMessage.show(data.msg, {cssClass: 'alert-warning', timeOut: 5000});
+      this.router.navigate(['/login']);
+    });
+  }
 }
