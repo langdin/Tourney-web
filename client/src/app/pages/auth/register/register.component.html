@@ -1,0 +1,35 @@
+<div class="container">
+  <h2 class="text-center">REGISTER</h2>
+  <div class="row">
+    <div class="container col-md-4">
+      <form autocomplete="off" >
+        <fieldset class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" class="form-control" name="username"
+            placeholder="Enter Username" id="username" required autocomplete="off">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" class="form-control" name="password"
+            placeholder="Enter Password" id="password" required autocomplete="off">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" name="email" placeholder="Enter Email"
+            id="email" required autocomplete="off">
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="displayName">Dispaly Name:</label>
+          <input type="text" class="form-control" name="displayName"
+            placeholder="Enter Display Name" id="displayName" required autocomplete="off">
+        </fieldset>
+        <fieldset class="form-group text-center">
+          <input type="submit" class="btn btn-success" value="Register" style="margin: 10px; background-color: rgb(0,148,193); color:black">
+          <a routerLink="/home">
+            <input type="button" class="btn btn-warning" value="Cancel" style="margin: 10px;">
+          </a>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
