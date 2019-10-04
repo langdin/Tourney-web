@@ -9,9 +9,13 @@ import { BasePageComponent } from './partials/base-page/base-page.component';
 import { FlashMessagesModule, FlashMessagesService } from 'angular2-flash-messages';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
+import { FormsModule } from '@angular/forms';
 
 // Route Guards
 import { AuthGuard } from './guards/auth.guard';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { RegisterComponent } from './pages/auth/register/register.component';
+import { HomeComponent } from './pages/home/home.component';
 
 export function jwtTokenGetter() {
   return localStorage.getItem('id_token');
@@ -22,12 +26,16 @@ export function jwtTokenGetter() {
     AppComponent,
     FooterComponent,
     HeaderComponent,
-    BasePageComponent
+    BasePageComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     FlashMessagesModule,
     JwtModule.forRoot({
       config: {
