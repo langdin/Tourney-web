@@ -1,6 +1,7 @@
 let playerModel = require("../models/player");
 
 module.exports.GetPlayersList = (req, res, next) => {
+  // find all
   playerModel.find((err, playersList) => {
     if (err) {
       return console.error(err);
@@ -16,11 +17,14 @@ module.exports.GetPlayersList = (req, res, next) => {
 };
 
 module.exports.ProcessAddPlayer = (req, res, next) => {
+  // new
   let newPlayer = playerModel({
     name: req.body.name,
-    points: req.body.points
+    points: req.body.points,
+    boutId: req.body.boutId
   });
 
+  // save
   newPlayer.save((err, playerModel) => {
     if (err) {
       console.log(err);
@@ -32,7 +36,10 @@ module.exports.ProcessAddPlayer = (req, res, next) => {
 };
 
 module.exports.GetPlayerById = (req, res, next) => {
+  // get id
   let id = req.params.id;
+
+  // find
   playerModel.findById(id, (err, playerObject) => {
     if (err) {
       return console.error(err);
@@ -47,14 +54,18 @@ module.exports.GetPlayerById = (req, res, next) => {
 };
 
 module.exports.ProcessEditPlayer = (req, res, next) => {
+  // get id
   let id = req.params.id;
 
+  // get updated player
   let updatedPLayer = playerModel({
     _id: id,
     name: req.body.name,
-    points: req.body.points
+    points: req.body.points,
+    boutId: req.body.boutId
   });
 
+  // update
   playerModel.updateOne({ _id: id }, updatedPLayer, err => {
     if (err) {
       console.log(err);
@@ -62,7 +73,7 @@ module.exports.ProcessEditPlayer = (req, res, next) => {
     } else {
       res.json({
         success: true,
-        msg: "Successfully Added New Player",
+        msg: "Successfully Updated Player",
         player: updatedPLayer
       });
     }
