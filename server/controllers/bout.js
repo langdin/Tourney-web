@@ -17,6 +17,7 @@ module.exports.GetBoutList = (req, res, next) => {
 };
 
 module.exports.ProcessAddBout = (req, res, next) => {
+  // create new
   let newBout = boutModel({
     number:  req.body.number,
     tourneyId: req.body.tourneyId

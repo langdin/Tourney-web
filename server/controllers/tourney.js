@@ -83,9 +83,11 @@ module.exports.ProcessEditTourney = (req, res, next) => {
 };
 
 
-module.exports.performDelete = (req, res, next) => {
+module.exports.PerformDelete = (req, res, next) => {
+  // get id
   let id = req.params.id;
 
+  // delete
   tourneyModel.remove({_id: id}, (err) => {
       if(err) {
           console.log(err);
