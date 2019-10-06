@@ -18,12 +18,9 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/about"><i class="fa fa-info-circle"></i> About</a>
         </li>
-        <li *ngIf="isLoggedIn()" class="nav-item">
-          <a class="nav-link" routerLink="/survey-list"><i class="fa fa-briefcase"></i> Surveys</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/take-survey"><i class="fa fa-folder-open"></i> TakeSurvey</a>
-        </li>
+        <li *ngIf="isLoggedIn()" class="nav-item"><a routerLink="/tourneys" class="nav-link">
+          <i class="fas fa-trophy"></i> Manage My Tourneys</a>
+      </li>
 
         <li class="nav-item">
           <a class="nav-link" routerLink="/contact"><i class="fa fa-phone"></i> Contact</a>
@@ -37,7 +34,8 @@
           <i class="fas fa-user"></i>Welcome,{{ user.displayName }}</li>
 
         <li *ngIf="isLoggedIn()" class="nav-item"><a (click)="onLogoutClick()" routerLink="/logout" class="nav-link">
-            <i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <i class="fas fa-sign-out-alt"></i> Logout</a>
+        </li>
 
         <li *ngIf="!isLoggedIn()" class="nav-item"><a routerLink="/login" class="nav-link">
             <i class="fas fa-sign-in-alt"></i> Login</a></li>
