@@ -15,6 +15,7 @@ export class MyTourneyDetailsComponent implements OnInit {
   title: string;
   tourney: Tourney;
   currentUser: User;
+  tourneyId: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -28,6 +29,7 @@ export class MyTourneyDetailsComponent implements OnInit {
     this.isLoggedIn();
     this.tourney = new Tourney();
     this.tourney.description = '';
+    this.tourneyId = this.activatedRoute.snapshot.params.id;
     this.title = this.activatedRoute.snapshot.data.title;
     if (this.title === 'Edit Tourney') {
       this.getTourney();
@@ -35,13 +37,18 @@ export class MyTourneyDetailsComponent implements OnInit {
   }
 
   private getTourney() {
-
+    this.tourneyService.getTourney(this.tourneyId).subscribe(data => {
+      if (data.success) {
+        this.tourney = data.tourney;
+      }
+    });
   }
 
   public onDetailsPageSubmit() {
     this.tourney.ownerId = this.currentUser['id'];
     if (this.title === 'Add Tourney') {
       // Add New Tourney
+      this.tourney.status = 'Not Active';
       this.tourneyService.addTourney(this.tourney).subscribe(data => {
         if (data.success) {
           this.flashMessage.show(data.msg, {cssClass: 'alert-success', timeOut: 3000});
