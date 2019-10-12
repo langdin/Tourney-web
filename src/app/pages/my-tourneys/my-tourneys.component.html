@@ -1,3 +1,71 @@
-<p>
-  my-tourneys works!
-</p>
+<div class="container">
+  <h3 class="text-left">My Tourneys</h3>
+  <div class="row">
+    <div class="col-md-offset-4 col-md-12 table-responsive">
+      <!--      <a routerLink="/tourney-list/add" class="btn btn-outline-primary" role="button">
+        <i class="fa fa-plus-circle"></i>
+        Add tourney</a>
+      <br /> -->
+      <table class="table table-bordered ">
+        <!-- Header Row-->
+        <thead class="thead-dark">
+          <tr>
+            <th class=" text-center align-middle">
+              Name
+            </th>
+            <th class=" text-center align-middle">
+              Description
+            </th>
+            <th class=" text-center align-middle">
+              <a
+                routerLink="/tourney-list/add"
+                class="btn btn-light"
+                role="button"
+              >
+                <i class="fa fa-plus-circle"></i> Add a tourney
+              </a>
+            </th>
+          </tr>
+        </thead>
+
+        <!-- Repeatable Template Row -->
+        <tbody>
+          <tr *ngFor="let tourney of tourneys">
+            <td class=" text-center align-middle">
+              {{ tourney.name }}
+            </td>
+            <td class=" text-center align-middle">
+              {{ tourney.description }}
+            </td>
+            <td class=" text-center align-middle">
+              <a
+                routerLink="/tourney-list/detail/{{ tourney._id }}"
+                class="btn btn-dark btn-block"
+              >
+                <i class="fas fa-eye"></i>
+              </a>
+              <a
+                routerLink="/tourney-list/edit/{{ tourney._id }}"
+                class="btn btn-dark btn-block"
+              >
+                <i class="fas fa-pencil-alt"></i>
+              </a>
+              <a
+                routerLink="/tourney-list/delete/{{ tourney._id }}"
+                class="btn btn-dark btn-block"
+              >
+                <i class="fas fa-trash"></i>
+              </a>
+              <a
+                routerLink="/report/{{ tourney._id }}"
+                class="btn btn-dark btn-block"
+              >
+                <i class="fas fa-cloud-download-alt"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
