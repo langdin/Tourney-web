@@ -16,6 +16,23 @@ module.exports.GetTourneysList = (req, res, next) => {
   });
 };
 
+module.exports.GetUserTourneysList = (req, res, next) => {
+  let userId = req.body.userId;
+  // find user tourneys
+  tourneyModel.find({ownerId: userId}, (err, tourneyList) => {
+    if (err) {
+      return console.error(err);
+    } else {
+      res.json({
+        success: true,
+        msg: "tourneys List Displayed Successfully",
+        tourneysList: tourneyList,
+        user: req.user
+      });
+    }
+  });
+};
+
 module.exports.ProcessAddTourney = (req, res, next) => {
   // new
   let newTourney = tourneyModel({

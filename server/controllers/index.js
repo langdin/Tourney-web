@@ -67,7 +67,7 @@ module.exports.processRegisterPage = (req, res, next) => {
       }
       return res.json({
         success: false,
-        msg: "ERROR: Failed to Register User!"
+        msg: "ERROR: Failed to Register User. Please try again."
       });
     } else {
       // if no error exists, then registration is successful
