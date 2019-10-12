@@ -18,7 +18,7 @@ export class MyTourneysComponent implements OnInit {
   userId: string;
 
   constructor(
-    private myTourneysService: MyTourneysService,
+    private tourneysService: MyTourneysService,
     private authService: AuthService,
     private flashMessage: FlashMessagesService,
     private router: Router
@@ -27,19 +27,15 @@ export class MyTourneysComponent implements OnInit {
   ngOnInit() {
     this.currentUser = new User();
     this.tourneys = new Array<Tourney>();
-    if (this.isLoggedIn()) {
-      this.userId = this.currentUser['id'];
-      this.displayUserTourneys();
-    } else {
-      this.router.navigate(['/login']);
-    }
-    console.log(this.currentUser);
+    this.isLoggedIn();
+    this.userId = this.currentUser['id'];
+    this.displayUserTourneys();
+
   }
 
-  public displayUserTourneys() {
-    this.myTourneysService.getUserTourneys({userId: this.userId}).subscribe(data => {
+  private displayUserTourneys() {
+    this.tourneysService.getUserTourneys({userId: this.userId}).subscribe(data => {
       this.tourneys = data.tourneysList;
-      console.log(this.tourneys);
     });
   }
 
