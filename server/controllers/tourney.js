@@ -38,6 +38,7 @@ module.exports.ProcessAddTourney = (req, res, next) => {
   let newTourney = tourneyModel({
     name: req.body.name,
     description: req.body.description,
+    status: req.body.status,
     numberOfPlayers: req.body.numberOfPlayers,
     ownerId: req.body.ownerId,
   });
@@ -80,6 +81,7 @@ module.exports.ProcessEditTourney = (req, res, next) => {
     _id: id,
     name: req.body.name,
     description: req.body.description,
+    status: req.body.status,
     numberOfPlayers: req.body.numberOfPlayers,
     ownerId: req.body.ownerId,
   });

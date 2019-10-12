@@ -3,6 +3,7 @@ let mongoose = require('mongoose');
 let tourneySchema = mongoose.Schema({
   name: String,
   description: String,
+  status: String,
   numberOfPlayers: Number,
   ownerId: String
 },
