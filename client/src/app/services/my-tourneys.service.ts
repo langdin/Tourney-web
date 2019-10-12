@@ -34,4 +34,12 @@ export class MyTourneysService {
   public updateTourney(tourney: Tourney): Observable<any> {
     return this.httpClient.post(this.endpoint + 'edit/' + tourney._id, tourney, this.httpOptions);
   }
+
+  public getTourney(tourneyId: string): Observable<any> {
+    return this.httpClient.get(this.endpoint + '/' + tourneyId, this.httpOptions);
+  }
+
+  public deleteTourney(tourneyId: string): Observable<any> {
+    return this.httpClient.get(this.endpoint + 'delete/' + tourneyId, this.httpOptions);
+  }
 }

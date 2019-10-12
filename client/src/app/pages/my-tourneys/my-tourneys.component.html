@@ -2,7 +2,7 @@
   <h3 class="text-left">My Tourneys</h3>
   <div class="row">
     <div class="col-md-offset-4 col-md-12 table-responsive">
-      <!--      <a routerLink="/tourney-list/add" class="btn btn-outline-primary" role="button">
+      <!--      <a routerLink="/my_tourneys/add" class="btn btn-outline-primary" role="button">
         <i class="fa fa-plus-circle"></i>
         Add tourney</a>
       <br /> -->
@@ -45,20 +45,21 @@
             </td>
             <td class=" text-center align-middle">
               <a
-                routerLink="/tourney-list/detail/{{ tourney._id }}"
+                routerLink="/my_tourneys/detail/{{ tourney._id }}"
                 class="btn btn-dark btn-block"
               >
                 <i class="fas fa-eye"></i>
               </a>
               <a
-                routerLink="/tourney-list/edit/{{ tourney._id }}"
+                routerLink="/my_tourneys/edit/{{ tourney._id }}"
                 class="btn btn-dark btn-block"
               >
                 <i class="fas fa-pencil-alt"></i>
               </a>
               <a
-                routerLink="/tourney-list/delete/{{ tourney._id }}"
+                routerLink="/my_tourneys/delete/{{ tourney._id }}"
                 class="btn btn-dark btn-block"
+                (click)="onDeleteClick()"
               >
                 <i class="fas fa-trash"></i>
               </a>

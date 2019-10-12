@@ -21,6 +21,6 @@ router.get('/:id', tourneyController.GetTourneyById);
 router.post('/edit/:id', tourneyController.ProcessEditTourney);
 
 /* POST - processes the delete tourney */
-router.post('/delete/:id', tourneyController.PerformDelete);
+router.get('/delete/:id', tourneyController.PerformDelete);
 
 module.exports = router;
