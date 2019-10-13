@@ -56,14 +56,14 @@
           </span>
           <span
           class="badge badge-danger"
-          *ngIf="num.value < 2 && num.value%2 != 0"
+          *ngIf="num.value < 2 || num.value % 2 != 0"
           >
             Number of participants must be odd and greater than 2
           </span>
         </fieldset>
 
         <fieldset class="form-group text-center">
-          <button type="submit" class="btn btn-primary" [disabled]="form.invalid || (num.value < 2 && num.value%2 != 0)">
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid || num.value < 2 || num.value%2 != 0">
             <i class="fa fa-edit"></i>
             {{ title }}
           </button>

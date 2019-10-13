@@ -17,4 +17,7 @@ router.get('/:id', playerController.GetPlayerById);
 /* POST - processes the add player */
 router.post('/edit/:id', playerController.ProcessEditPlayer);
 
+/* GET - perform delete player */
+router.get('/delete/:id', playerController.PerformDelete);
+
 module.exports = router;

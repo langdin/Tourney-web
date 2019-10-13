@@ -33,3 +33,19 @@ module.exports.ProcessAddBout = (req, res, next) => {
     }
   });
 }
+
+module.exports.PerformDelete = (req, res, next) => {
+  // get id
+  let id = req.params.id;
+
+  // delete
+  boutModel.remove({_id: id}, (err) => {
+      if(err) {
+          console.log(err);
+          res.end(err);
+      }
+      else {
+          res.json({success: true, msg: 'Successfully Deleted Bout'});
+      }
+  });
+}
