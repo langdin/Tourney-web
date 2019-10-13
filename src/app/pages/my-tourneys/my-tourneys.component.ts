@@ -16,6 +16,7 @@ export class MyTourneysComponent implements OnInit {
   tourneys: Tourney[];
   currentUser: User;
   userId: string;
+  tourneyId: string;
 
   constructor(
     private tourneysService: MyTourneysService,
@@ -51,5 +52,9 @@ export class MyTourneysComponent implements OnInit {
     if (!confirm('Are you sure?')) {
       this.router.navigate(['/my_tourneys']);
     }
+  }
+
+  getId(id: string) {
+    this.tourneyId = id;
   }
 }
