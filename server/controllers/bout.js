@@ -16,6 +16,22 @@ module.exports.GetBoutList = (req, res, next) => {
   });
 };
 
+module.exports.GetBoutsByTourneyId = (req, res, next) => {
+  let id = req.params.id;
+  // find by tourney id
+  boutModel.find({tourneyId: id}, (err, boutList) => {
+    if (err) {
+      return console.error(err);
+    } else {
+      res.json({
+        success: true,
+        msg: "Successfully Got Bouts by Tourney ID",
+        boutList: boutList
+      });
+    }
+  });
+};
+
 module.exports.ProcessAddBout = (req, res, next) => {
   // create new
   let newBout = boutModel({

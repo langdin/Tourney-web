@@ -11,6 +11,9 @@ router.get('/', boutController.GetBoutList);
 /* POST - processes the add bout */
 router.post('/add', boutController.ProcessAddBout);
 
+/* GET - get Bout List by tourneyID */
+router.get('/by_tourney/:id', boutController.GetBoutsByTourneyId);
+
 /* GET - process delete Bout */
 router.get('/delete/:id', boutController.PerformDelete);
 
