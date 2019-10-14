@@ -19,27 +19,27 @@ export class ManageTourneyComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private tourneysService: MyTourneysService,
+  //private tourneysService: MyTourneysService,
     private boutService: BoutService,
     private flashMessage: FlashMessagesService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.tourney = new Tourney();
+    //this.tourney = new Tourney();
     this.bouts = new Array<Bout>();
     this.tourneyId = this.activatedRoute.snapshot.params.id;
     this.getBouts();
-    this.getTourney();
+    //this.getTourney();
   }
 
-  private getTourney() {
-    this.tourneysService.getTourney(this.tourneyId).subscribe(data => {
-      if (data.success) {
-        this.tourney = data.tourney;
-      }
-    });
-  }
+  // private getTourney() {
+  //   this.tourneysService.getTourney(this.tourneyId).subscribe(data => {
+  //     if (data.success) {
+  //       this.tourney = data.tourney;
+  //     }
+  //   });
+  // }
 
   private getBouts() {
     this.boutService.getBoutsByTourney(this.tourneyId).subscribe(data => {
@@ -54,7 +54,7 @@ export class ManageTourneyComponent implements OnInit {
     const bout = new Bout();
     bout.number = this.bouts.length + 1;
     bout.tourneyId = this.tourneyId;
-    if (bout.number > this.tourney.numberOfPlayers / 2) {
+    if (bout.number > 1) {
       this.flashMessage.show('New bouts can not be added.', {cssClass: 'alert-warning', timeOut: 3000});
     } else {
       this.boutService.addBout(bout).subscribe(data => {
