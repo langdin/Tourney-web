@@ -2,6 +2,7 @@ let mongoose = require('mongoose');
 // create a model class
 let boutSchema = mongoose.Schema({
     number: Number,
+    full: String,
     tourneyId: String
 },
 {

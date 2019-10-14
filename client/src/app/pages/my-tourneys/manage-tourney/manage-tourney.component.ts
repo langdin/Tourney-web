@@ -19,33 +19,40 @@ export class ManageTourneyComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-  //private tourneysService: MyTourneysService,
+    private tourneysService: MyTourneysService,
     private boutService: BoutService,
     private flashMessage: FlashMessagesService,
     private router: Router
-  ) { }
+  ) {
+    activatedRoute.params.subscribe(val => {
+      this.tourney = new Tourney();
+      this.tourneyId = this.activatedRoute.snapshot.params.id;
+      this.bouts = new Array<Bout>();
+      this.getBouts();
+      this.getTourney();
+    });
+   }
 
   ngOnInit() {
-    //this.tourney = new Tourney();
-    this.bouts = new Array<Bout>();
+    this.tourney = new Tourney();
     this.tourneyId = this.activatedRoute.snapshot.params.id;
+    this.bouts = new Array<Bout>();
     this.getBouts();
-    //this.getTourney();
+    this.getTourney();
   }
 
-  // private getTourney() {
-  //   this.tourneysService.getTourney(this.tourneyId).subscribe(data => {
-  //     if (data.success) {
-  //       this.tourney = data.tourney;
-  //     }
-  //   });
-  // }
+  private getTourney() {
+    this.tourneysService.getTourney(this.tourneyId).subscribe(data => {
+      if (data.success) {
+        this.tourney = data.tourney;
+      }
+    });
+  }
 
   private getBouts() {
     this.boutService.getBoutsByTourney(this.tourneyId).subscribe(data => {
       if (data.success) {
         this.bouts = data.boutList;
-        console.log(this.bouts);
       }
     });
   }
@@ -53,6 +60,7 @@ export class ManageTourneyComponent implements OnInit {
   private addBout() {
     const bout = new Bout();
     bout.number = this.bouts.length + 1;
+    bout.full = 'no';
     bout.tourneyId = this.tourneyId;
     if (bout.number > 1) {
       this.flashMessage.show('New bouts can not be added.', {cssClass: 'alert-warning', timeOut: 3000});
@@ -60,10 +68,10 @@ export class ManageTourneyComponent implements OnInit {
       this.boutService.addBout(bout).subscribe(data => {
         if (data.success) {
           this.flashMessage.show(data.msg, {cssClass: 'alert-success', timeOut: 3000});
-          this.router.navigate(['/manage_tourney/' + this.tourneyId]);
+          location.reload();
         } else {
           this.flashMessage.show(data.msg, {cssClass: 'alert-danger', timeOut: 3000});
-          this.router.navigate(['/manage_tourney/' + this.tourneyId]);
+          location.reload();
         }
       });
     }

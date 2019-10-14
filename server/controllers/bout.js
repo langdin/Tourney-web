@@ -1,5 +1,4 @@
 let boutModel = require("../models/bout");
-let tourneyModel = require("../models/tourney");
 
 module.exports.GetBoutList = (req, res, next) => {
   // find all
@@ -36,6 +35,7 @@ module.exports.ProcessAddBout = (req, res, next) => {
   // create new
   let newBout = boutModel({
     number:  req.body.number,
+    full: req.body.full,
     tourneyId: req.body.tourneyId
   });
 
