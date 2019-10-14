@@ -48,12 +48,6 @@ export class MyTourneysComponent implements OnInit {
     return result;
   }
 
-  private onDeleteClick(): void {
-    if (!confirm('Are you sure?')) {
-      this.router.navigate(['/my_tourneys']);
-    }
-  }
-
   getId(id: string) {
     this.tourneyId = id;
   }
