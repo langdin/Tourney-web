@@ -1,6 +1,6 @@
 export class Bout {
   _id: string;
   number: number;
-  full: string;
+  maxNumOfPlayers: number;
   tourneyId: string;
 }

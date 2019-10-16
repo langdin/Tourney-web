@@ -60,7 +60,7 @@ export class ManageTourneyComponent implements OnInit {
   private addBout() {
     const bout = new Bout();
     bout.number = this.bouts.length + 1;
-    bout.full = 'no';
+    bout.maxNumOfPlayers = this.tourney.numberOfPlayers;
     bout.tourneyId = this.tourneyId;
     if (bout.number > 1) {
       this.flashMessage.show('New bouts can not be added.', {cssClass: 'alert-warning', timeOut: 3000});
