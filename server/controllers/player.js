@@ -1,4 +1,5 @@
 let playerModel = require("../models/player");
+let boutModel = require("../models/bout");
 
 module.exports.GetPlayersList = (req, res, next) => {
   // find all
@@ -24,13 +25,32 @@ module.exports.ProcessAddPlayer = (req, res, next) => {
     boutId: req.body.boutId
   });
 
-  // save
-  newPlayer.save((err, playerModel) => {
+  boutModel.findOne({ _id: newPlayer.boutId }, (err, bout) => {
     if (err) {
-      console.log(err);
-      res.end(err);
+      return console.error(err);
     } else {
-      res.json({ success: true, msg: "Successfully Added New Player" });
+      // find all players of bout
+      playerModel.find({ boutId: newPlayer.boutId }, (err, playersList) => {
+        if (err) {
+          return console.error(err);
+        } else {
+          if (playersList.length == bout.maxNumOfPlayers) {
+            res.json({ success: false, msg: "The Bout is Full" });
+          } else {
+            // save
+            newPlayer.save(err => {
+              if (err) {
+                console.log(err);
+                res.end(err);
+              } else {
+                res.json({ success: true, msg: "Successfully Added New Player" });
+              }
+            });
+          }
+        }
+      });
+
+
     }
   });
 };
@@ -85,13 +105,12 @@ module.exports.PerformDelete = (req, res, next) => {
   let id = req.params.id;
 
   // delete
-  playerModel.remove({_id: id}, (err) => {
-      if(err) {
-          console.log(err);
-          res.end(err);
-      }
-      else {
-          res.json({success: true, msg: 'Successfully Deleted Player'});
-      }
+  playerModel.remove({ _id: id }, err => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      res.json({ success: true, msg: "Successfully Deleted Player" });
+    }
   });
-}
+};
