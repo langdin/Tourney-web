@@ -47,6 +47,7 @@
             value="{{ tourney.numberOfPlayers }}"
             required
             #num="ngModel"
+            [disabled]="this.title==='Edit Tourney'"
           />
           <span
           class="badge badge-danger"
@@ -60,6 +61,11 @@
           >
             Number of participants must be odd and greater than 2
           </span>
+          <span
+          class="badge badge-danger"
+          >
+            Number of participants cannot be modified
+          </span>
         </fieldset>
 
         <fieldset class="form-group text-center">
@@ -67,7 +73,7 @@
             <i class="fa fa-edit"></i>
             {{ title }}
           </button>
-          <a href="/my_tourneys" class="btn btn-warning mx-1"
+          <a routerLink="/my_tourneys" class="btn btn-warning mx-1"
             ><i class="fa fa-undo"></i>
             Cancel
           </a>

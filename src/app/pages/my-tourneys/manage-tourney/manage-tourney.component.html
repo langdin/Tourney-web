@@ -7,15 +7,21 @@
   </div>
   <hr />
   <div class="container">
-    <button class="btn btn-light" role="button" [disabled]="bouts.length > 0" (click)="addBout()">
+    <button class="btn btn-light" role="button" [disabled]="bouts.length > 0" (click)="addFirstBout()">
       <i class="fa fa-plus-circle"></i> Add First Bout
     </button>
     <div class="row">
         <div class="card mt-3 mb-3" *ngFor="let bout of bouts" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">Round {{ bout.number }}</h5>
-              <a href="#" class="btn btn-primary">Go</a>
+              <a routerLink="/manage_bout/{{ bout._id }}" class="btn btn-primary">Go</a>
             </div>
+        </div>
+        <div class="col-md-12 text-center">
+          <a routerLink="/my_tourneys" class="btn btn-warning mx-1"
+            ><i class="fa fa-undo"></i>
+            Back
+          </a>
         </div>
     </div>
   </div>
