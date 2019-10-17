@@ -15,6 +15,22 @@ module.exports.GetBoutList = (req, res, next) => {
   });
 };
 
+module.exports.GetBoutById = (req, res, next) => {
+  let id = req.params.id;
+  // find by tourney id
+  boutModel.findById(id, (err, boutObj) => {
+    if (err) {
+      return console.error(err);
+    } else {
+      res.json({
+        success: true,
+        msg: "Successfully Got Bouts by Tourney ID",
+        bout: boutObj
+      });
+    }
+  });
+};
+
 module.exports.GetBoutsByTourneyId = (req, res, next) => {
   let id = req.params.id;
   // find by tourney id
@@ -31,6 +47,7 @@ module.exports.GetBoutsByTourneyId = (req, res, next) => {
   });
 };
 
+// TODO should check the number of bout
 module.exports.ProcessAddBout = (req, res, next) => {
   // create new
   let newBout = boutModel({

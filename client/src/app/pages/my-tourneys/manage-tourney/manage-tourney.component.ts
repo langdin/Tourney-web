@@ -24,13 +24,6 @@ export class ManageTourneyComponent implements OnInit {
     private flashMessage: FlashMessagesService,
     private router: Router
   ) {
-    activatedRoute.params.subscribe(val => {
-      this.tourney = new Tourney();
-      this.tourneyId = this.activatedRoute.snapshot.params.id;
-      this.bouts = new Array<Bout>();
-      this.getBouts();
-      this.getTourney();
-    });
    }
 
   ngOnInit() {
@@ -57,7 +50,7 @@ export class ManageTourneyComponent implements OnInit {
     });
   }
 
-  private addBout() {
+  private addFirstBout() {
     const bout = new Bout();
     bout.number = this.bouts.length + 1;
     bout.maxNumOfPlayers = this.tourney.numberOfPlayers;

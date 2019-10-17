@@ -22,6 +22,10 @@ export class BoutService {
     private httpClient: HttpClient
   ) { }
 
+  public getBoutById(id: string): Observable<any> {
+    return this.httpClient.get(this.endpoint + '/' + id, this.httpOptions);
+  }
+
   public getBoutsByTourney(tourneyId: string): Observable<any> {
     return this.httpClient.get(this.endpoint + 'by_tourney/' + tourneyId, this.httpOptions);
   }

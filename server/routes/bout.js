@@ -8,6 +8,9 @@ let boutController = require('../controllers/bout');
 /* GET - get Bout List */
 router.get('/', boutController.GetBoutList);
 
+/* GET - get Bout by ID */
+router.get('/:id', boutController.GetBoutById);
+
 /* POST - processes the add bout */
 router.post('/add', boutController.ProcessAddBout);
 

@@ -1,4 +1,5 @@
 let tourneyModel = require("../models/tourney");
+let boutModel = require("../models/bout");
 
 module.exports.GetTourneysList = (req, res, next) => {
   // find all
@@ -92,6 +93,7 @@ module.exports.ProcessEditTourney = (req, res, next) => {
       console.log(err);
       res.end(err);
     } else {
+      boutModel.
       res.json({
         success: true,
         msg: "Successfully Updated Tourney",
