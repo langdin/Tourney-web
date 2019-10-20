@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MyTourneysService } from 'src/app/services/my-tourneys.service';
 import { BoutService } from 'src/app/services/bout.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Bout } from 'src/app/models/bout';
+import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   selector: 'app-manage-bout',
@@ -17,7 +17,7 @@ export class ManageBoutComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private tourneysService: MyTourneysService,
+    private playerService: PlayerService,
     private boutService: BoutService,
     private flashMessage: FlashMessagesService,
     private router: Router
@@ -39,5 +39,9 @@ export class ManageBoutComponent implements OnInit {
         this.router.navigate(['/my_tourneys']);
       }
     });
+  }
+
+  private addPlayer() {
+
   }
 }

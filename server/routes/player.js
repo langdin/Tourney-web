@@ -8,6 +8,9 @@ let playerController = require('../controllers/player');
 /* GET - get Players List */
 router.get('/', playerController.GetPlayersList);
 
+/* GET - get Players by Bout ID */
+router.get('/by_bout/:id', playerController.GetPlayersByBout);
+
 /* POST - processes the add player */
 router.post('/add', playerController.ProcessAddPlayer);
 

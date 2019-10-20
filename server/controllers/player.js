@@ -17,6 +17,23 @@ module.exports.GetPlayersList = (req, res, next) => {
   });
 };
 
+module.exports.GetPlayersByBout = (req, res, next) => {
+  let boutId = req.params.id;
+  // find all
+  playerModel.find({boutId}, (err, playersList) => {
+    if (err) {
+      return console.error(err);
+    } else {
+      res.json({
+        success: true,
+        msg: "Players List Displayed Successfully",
+        playersList: playersList,
+        user: req.user
+      });
+    }
+  });
+};
+
 module.exports.ProcessAddPlayer = (req, res, next) => {
   // new
   let newPlayer = playerModel({
@@ -29,15 +46,16 @@ module.exports.ProcessAddPlayer = (req, res, next) => {
     if (err) {
       return console.error(err);
     } else {
-      // find all players of bout
+      // find all players by bout
       playerModel.find({ boutId: newPlayer.boutId }, (err, playersList) => {
         if (err) {
           return console.error(err);
         } else {
+          // if number of players in the bout is equal maxNumOfPlayers => return
           if (playersList.length == bout.maxNumOfPlayers) {
             res.json({ success: false, msg: "The Bout is Full" });
           } else {
-            // save
+            // add new player
             newPlayer.save(err => {
               if (err) {
                 console.log(err);
