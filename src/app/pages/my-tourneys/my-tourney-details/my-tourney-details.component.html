@@ -57,7 +57,7 @@
           </span>
           <span
           class="badge badge-danger"
-          *ngIf="num.value < 2 || num.value % 2 != 0"
+          *ngIf="(num.value < 2 || num.value % 2 != 0) && num.touched"
           >
             Number of participants must be odd and greater than 2
           </span>
