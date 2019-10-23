@@ -48,8 +48,11 @@ export class ManageTourneyComponent implements OnInit {
 
   private getTourney() {
     this.tourneysService.getTourney(this.tourneyId).subscribe(data => {
+      console.log(data);
       if (data.success) {
         this.tourney = data.tourney;
+      } else {
+        this.router.navigate(['/my_tourneys']);
       }
     });
   }

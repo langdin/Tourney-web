@@ -36,7 +36,7 @@ export class MyTourneysService {
   }
 
   public getTourney(tourneyId: string): Observable<any> {
-    return this.httpClient.get(this.endpoint + '/' + tourneyId, this.httpOptions);
+    return this.httpClient.get(this.endpoint + tourneyId, this.httpOptions);
   }
 
   public deleteTourney(tourneyId: string): Observable<any> {
