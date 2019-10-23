@@ -5,12 +5,17 @@
   </div>
   <div class="">
     <div class="mt-3 mb-3">
-      <button class="btn btn-light" role="button" >
+      <a routerLink="/players/add" class="btn btn-light" role="button" >
         <i class="fa fa-plus-circle"></i> Add participant
-      </button>
+      </a>
     </div>
     <div class="row">
-
+      <div class="card" style="width: 18rem;" *ngFor="let player of players ">
+        <div class="card-body">
+          <h5 class="card-title">{{ player.name }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Score: {{ player.points }}</h6>
+        </div>
+      </div>
     </div>
   </div>
 </div>

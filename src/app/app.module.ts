@@ -21,6 +21,7 @@ import { MyTourneyDetailsComponent } from './pages/my-tourneys/my-tourney-detail
 import { MyTourneyDeleteComponent } from './pages/my-tourneys/my-tourney-delete/my-tourney-delete.component';
 import { ManageTourneyComponent } from './pages/my-tourneys/manage-tourney/manage-tourney.component';
 import { ManageBoutComponent } from './pages/bout/manage-bout/manage-bout.component';
+import { PlayerDetailsComponent } from './pages/player/player-details/player-details.component';
 
 export function jwtTokenGetter() {
   return localStorage.getItem('id_token');
@@ -39,7 +40,8 @@ export function jwtTokenGetter() {
     MyTourneyDetailsComponent,
     MyTourneyDeleteComponent,
     ManageTourneyComponent,
-    ManageBoutComponent
+    ManageBoutComponent,
+    PlayerDetailsComponent
   ],
   imports: [
     BrowserModule,

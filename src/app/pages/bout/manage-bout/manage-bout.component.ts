@@ -4,6 +4,7 @@ import { BoutService } from 'src/app/services/bout.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Bout } from 'src/app/models/bout';
 import { PlayerService } from 'src/app/services/player.service';
+import { Player } from 'src/app/models/player';
 
 @Component({
   selector: 'app-manage-bout',
@@ -14,6 +15,7 @@ export class ManageBoutComponent implements OnInit {
 
   bout: Bout;
   boutId: string;
+  players: Player[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -25,8 +27,11 @@ export class ManageBoutComponent implements OnInit {
 
   ngOnInit() {
     this.bout = new Bout();
+    this.players = new Array<Player>();
     this.boutId = this.activatedRoute.snapshot.params.id;
+    localStorage.setItem('boutId', this.boutId);
     this.getBout();
+    this.getPlayers();
   }
 
   private getBout() {
@@ -41,7 +46,11 @@ export class ManageBoutComponent implements OnInit {
     });
   }
 
-  private addPlayer() {
-
+  private getPlayers() {
+    this.playerService.getPlayersByBout(this.boutId).subscribe(data => {
+      if (data.success) {
+        this.players = data.playersList;
+      }
+    });
   }
 }

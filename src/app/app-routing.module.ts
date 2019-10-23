@@ -9,6 +9,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { MyTourneyDeleteComponent } from './pages/my-tourneys/my-tourney-delete/my-tourney-delete.component';
 import { ManageTourneyComponent } from './pages/my-tourneys/manage-tourney/manage-tourney.component';
 import { ManageBoutComponent } from './pages/bout/manage-bout/manage-bout.component';
+import { PlayerDetailsComponent } from './pages/player/player-details/player-details.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -22,7 +23,11 @@ const routes: Routes = [
   {path: 'my_tourneys/delete/:id', component: MyTourneyDeleteComponent, canActivate: [AuthGuard]},
 
   {path: 'manage_tourney/:id', component: ManageTourneyComponent, canActivate: [AuthGuard]},
-  {path: 'manage_bout/:id', component: ManageBoutComponent, canActivate: [AuthGuard]}
+
+  {path: 'manage_bout/:id', component: ManageBoutComponent, canActivate: [AuthGuard]},
+
+  {path: 'players/add', component: PlayerDetailsComponent, data: {title: 'Add Participant'}, canActivate: [AuthGuard]},
+  {path: 'players/edit/:id', component: PlayerDetailsComponent, data: {title: 'Edit Participant'}, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
