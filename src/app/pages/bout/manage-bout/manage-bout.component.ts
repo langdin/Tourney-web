@@ -29,16 +29,16 @@ export class ManageBoutComponent implements OnInit {
     this.bout = new Bout();
     this.players = new Array<Player>();
     this.boutId = this.activatedRoute.snapshot.params.id;
-    localStorage.setItem('boutId', this.boutId);
     this.getBout();
     this.getPlayers();
+    localStorage.setItem('boutId', this.boutId);
   }
 
   private getBout() {
     this.boutService.getBoutById(this.boutId).subscribe(data => {
       if (data.success) {
         this.bout = data.bout;
-        console.log(this.bout);
+        localStorage.setItem('maxNumOfPlayers', '' + this.bout.maxNumOfPlayers );
       } else {
         this.flashMessage.show(data.msg, {cssClass: 'alert-warning', timeOut: 3000});
         this.router.navigate(['/my_tourneys']);
