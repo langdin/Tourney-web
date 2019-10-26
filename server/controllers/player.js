@@ -42,6 +42,7 @@ module.exports.ProcessAddPlayer = (req, res, next) => {
     boutId: req.body.boutId
   });
 
+  // find players in bout
   boutModel.findOne({ _id: newPlayer.boutId }, (err, bout) => {
     if (err) {
       return console.error(err);
