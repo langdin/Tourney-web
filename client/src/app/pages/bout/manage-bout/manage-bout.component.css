@@ -24,3 +24,17 @@
   padding: 0 !important;
   margin: 0 !important;
 }
+
+.player-score {
+  padding: .375rem .75rem;
+}
+
+.player-name {
+  font-size: 1.2em;
+  margin-right: 10px;
+  color: #006699;
+}
+
+.edit {
+  cursor: pointer;
+}
