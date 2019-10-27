@@ -28,9 +28,9 @@
             <input
               type="number"
               class="form-control"
-              id="PriorityTextField"
+              id="ScoreTextField"
               placeholder="Enter Number of Participants"
-              name="numberOfPlayers"
+              name="score"
               [(ngModel)]="score"
               value="{{ score }}"
               required
@@ -42,10 +42,16 @@
             >
               Number of points is required
             </span>
+            <span
+            class="badge badge-danger && num.touched"
+            *ngIf="num.value < 0"
+            >
+              Number of points can not be a negative number
+            </span>
           </fieldset>
 
           <fieldset class="form-group text-center">
-            <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+            <button type="submit" class="btn btn-primary" [disabled]="form.invalid || num.value < 0">
               <i class="fa fa-edit"></i>
               {{ title }}
             </button>

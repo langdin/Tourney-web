@@ -15,11 +15,15 @@ import { Point } from 'src/app/models/point';
 export class PlayerDetailsComponent implements OnInit {
 
   title: string;
+  // player
   player: Player;
   playerId: string;
+  // bout
   boutId: string;
   bout: Bout;
   numOfPlayers: number;
+  boutNum: number; // number of current bout
+  // score in current bout for display
   score: number;
 
   constructor(
@@ -39,7 +43,6 @@ export class PlayerDetailsComponent implements OnInit {
     this.player.boutId = this.boutId;
     if (this.title === 'Edit Participant') {
       this.getPlayer();
-      this.score = this.player.points[this.bout.number - 1].score;
     }
     console.log(this.player);
   }
@@ -48,6 +51,7 @@ export class PlayerDetailsComponent implements OnInit {
     this.playerService.getPlayersById(this.playerId).subscribe(data => {
       if (data.success) {
         this.player = data.player;
+        this.score = this.player.points[this.boutNum].score;
       } else {
         this.router.navigate(['/my_tourneys']);
       }
@@ -58,6 +62,7 @@ export class PlayerDetailsComponent implements OnInit {
     this.boutService.getBoutById(this.boutId).subscribe(data => {
       if (data.success) {
         this.bout = data.bout;
+        this.boutNum = this.bout.number - 1;
         this.player.points = new Array<Point>(this.bout.maxNumOfPlayers / 2).fill({score: 0});
       } else {
         this.router.navigate(['/my_tourneys']);
@@ -67,7 +72,7 @@ export class PlayerDetailsComponent implements OnInit {
 
   private onDetailsPageSubmit() {
     if (this.title === 'Add Participant') {
-      this.player.points[0] = { score: this.score };
+      this.player.points[this.boutNum] = { score: this.score };
       this.playerService.addPlayer(this.player).subscribe(data => {
         if (data.success) {
           this.flashMessage.show(data.msg, {cssClass: 'alert-success', timeOut: 3000});
@@ -75,6 +80,7 @@ export class PlayerDetailsComponent implements OnInit {
         }
       });
     } else if (this.title === 'Edit Participant') {
+      this.player.points[this.boutNum] = { score: this.score };
       this.playerService.updatePlayer(this.player).subscribe(data => {
         if (data.success) {
           this.flashMessage.show(data.msg, {cssClass: 'alert-success', timeOut: 3000});
