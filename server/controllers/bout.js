@@ -62,7 +62,7 @@ module.exports.ProcessAddBout = (req, res, next) => {
       console.log(err);
       res.end(err);
     } else {
-      res.json({ success: true, msg: "Successfully Added New Bout" });
+      res.json({ success: true, bout: boutModel, msg: "Successfully Added New Bout" });
     }
   });
 }

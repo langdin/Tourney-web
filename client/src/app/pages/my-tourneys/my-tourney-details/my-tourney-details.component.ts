@@ -16,6 +16,10 @@ export class MyTourneyDetailsComponent implements OnInit {
   tourney: Tourney;
   currentUser: User;
   tourneyId: string;
+  // dropdown text
+  ddNum: string;
+  //
+  disabled: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -27,25 +31,30 @@ export class MyTourneyDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn();
+    this.disabled = false;
     this.tourney = new Tourney();
     this.tourney.description = '';
     this.tourneyId = this.activatedRoute.snapshot.params.id;
     this.title = this.activatedRoute.snapshot.data.title;
     if (this.title === 'Edit Tourney') {
       this.getTourney();
+      this.disabled = true;
     }
+    this.ddNum = 'Choose Number';
   }
 
   private getTourney() {
     this.tourneyService.getTourney(this.tourneyId).subscribe(data => {
       if (data.success) {
         this.tourney = data.tourney;
+        this.ddNum = this.tourney.numberOfPlayers.toString();
       }
     });
   }
 
   public onDetailsPageSubmit() {
     this.tourney.ownerId = this.currentUser['id'];
+    this.tourney.numberOfPlayers = +this.ddNum;
     if (this.title === 'Add Tourney') {
       // Add New Tourney
       this.tourney.status = 'Not Active';
@@ -78,5 +87,9 @@ export class MyTourneyDetailsComponent implements OnInit {
       this.currentUser = JSON.parse(localStorage.getItem('user'));
     }
     return result;
+  }
+
+  private selectNumOfPlayers(num: string) {
+    this.ddNum = num;
   }
 }

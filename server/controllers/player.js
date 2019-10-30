@@ -39,7 +39,7 @@ module.exports.ProcessAddPlayer = (req, res, next) => {
   let newPlayer = playerModel({
     name: req.body.name,
     points: req.body.points,
-    boutId: req.body.boutId
+    bouts: req.body.boutId
   });
 
   // find players in bout
@@ -101,7 +101,7 @@ module.exports.ProcessEditPlayer = (req, res, next) => {
     _id: id,
     name: req.body.name,
     points: req.body.points,
-    boutId: req.body.boutId
+    bouts: req.body.boutId
   });
 
   // update

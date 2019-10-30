@@ -44,7 +44,7 @@ export class PlayerDetailsComponent implements OnInit {
     if (this.title === 'Edit Participant') {
       this.getPlayer();
     }
-    console.log(this.player);
+    // console.log(this.player);
   }
 
   private getPlayer() {

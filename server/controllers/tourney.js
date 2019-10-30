@@ -103,7 +103,8 @@ module.exports.ProcessEditTourney = (req, res, next) => {
   });
 };
 
-
+// TODO DEEP DELETE
+// IF DELETE TOURNEY DELETE ALL BOUTS AND PLAYERS IN IT
 module.exports.PerformDelete = (req, res, next) => {
   // get id
   let id = req.params.id;

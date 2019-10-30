@@ -6,7 +6,9 @@ let playerSchema = mongoose.Schema({
     points: [{
       score: Number
       }],
-    boutId: String
+    bouts: [{
+      boutId: String
+    }]
 },
 {
     collection: "player"
