@@ -17,6 +17,8 @@ export class ManageBoutComponent implements OnInit {
   boutId: string;
   players: Player[];
   winners: Player[];
+  // dropdown button name
+  ddName: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -33,6 +35,12 @@ export class ManageBoutComponent implements OnInit {
     this.getBout();
     this.getPlayers();
     localStorage.setItem('boutId', this.boutId);
+    this.ddName = 'Pick a winner';
+  }
+
+  private selectWinner(chosen: Player) {
+    //console.log(name);
+    this.ddName = chosen.name;
   }
 
   private getBout() {

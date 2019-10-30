@@ -16,46 +16,46 @@
     </div>
     <div class="row">
       <div class="col-md-6 player-p-m">
-        <div
-          class="player row player-p-m"
-          *ngFor="let player of players; let odd = odd"
-          [ngClass]="{ right_border: odd }"
-        >
-          <div class="player-body col-md-12">
-            <div class="mt-4">
-                <span class="font-weight-bold player-name">
-                  {{ player.name }}
-                </span>
-                <a routerLink="/players/edit/{{player._id}}" class="badge badge-secondary text-light edit">
-                    Edit
-                </a>
-            </div>
-            <div>
-                <span class="player-score badge badge-secondary">
-                  Score: {{ player.points[bout.number - 1].score }}
-                </span>
+        <div *ngFor="let player of players; let odd = odd; let last = last"
+        [ngClass]="{ right_border: odd }">
+          <div class="margin-box col-md-12" *ngIf="last&&!odd"></div>
+          <div class="player row player-p-m">
+            <div class="player-body col-md-12">
+              <div class="mt-4">
+                  <span class="font-weight-bold player-name">
+                    {{ player.name }}
+                  </span>
+                  <a routerLink="/players/edit/{{player._id}}" class="badge badge-secondary text-light edit">
+                      Edit
+                  </a>
+              </div>
+              <div>
+                  <span class="player-score badge badge-secondary">
+                    Score: {{ player.points[bout.number - 1].score }}
+                  </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="col-md-6 no-p-m">
-        <div *ngFor="let player of players; let last = last">
-          <div class="bracket" *ngIf="!last">
-              <div class="player-body col-md-12 pt-4">
-                  <div class="text-right">
-                      <span>Choose Winner</span>
-                      <div class="dropdown">
-                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown button
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                          </div>
+        <div *ngFor="let player of players; let last = last; let i = index; let even = even">
+          <div class="margin-box col-md-12"></div>
+          <div class="bracket" *ngIf="even">
+            <div class="margin-box col-md-12"></div>
+            <div class="player-body col-md-12">
+              <div class="text-right">
+                  <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ ddName }}
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <button class="dropdown-item" (click)="selectWinner(player)">{{ players[i].name }}</button>
+                        <button class="dropdown-item" *ngIf="players[i+1]" (click)="selectWinner(player)">{{ players[i+1].name }}</button>
                       </div>
                   </div>
-                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
