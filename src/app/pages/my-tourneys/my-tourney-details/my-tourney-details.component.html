@@ -36,40 +36,26 @@
           />
         </fieldset>
         <fieldset class="form-group">
-          <label for="PriorityTextField">Number of Participants</label>
-          <input
-            type="number"
-            class="form-control"
-            id="PriorityTextField"
-            placeholder="Enter Number of Participants"
-            name="numberOfPlayers"
-            [(ngModel)]="tourney.numberOfPlayers"
-            value="{{ tourney.numberOfPlayers }}"
-            required
-            #num="ngModel"
-            [disabled]="this.title==='Edit Tourney'"
-          />
-          <span
-          class="badge badge-danger"
-          *ngIf="num.errors?.required && num.touched"
-          >
-            Number of participants is required
-          </span>
-          <span
-          class="badge badge-danger"
-          *ngIf="(num.value < 2 || num.value % 2 != 0) && num.touched"
-          >
-            Number of participants must be odd and greater than 2
-          </span>
+          <label>Number of Participants</label>
+          <div class="dropdown">
+              <button [disabled]="disabled" class="btn btn-light btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ ddNum }}
+              </button>
+              <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" (click)="selectNumOfPlayers(4)">4</a>
+                <a class="dropdown-item" (click)="selectNumOfPlayers(8)">8</a>
+                <a class="dropdown-item" (click)="selectNumOfPlayers(16)">16</a>
+              </div>
+          </div>
           <span
           class="badge badge-warning"
           >
-            Number of participants cannot be modified
+            Number of participants cannot be modified afterwards
           </span>
         </fieldset>
 
         <fieldset class="form-group text-center">
-          <button type="submit" class="btn btn-primary" [disabled]="form.invalid || num.value < 2 || num.value%2 != 0">
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid || ddNum ==='Choose Number'">
             <i class="fa fa-edit"></i>
             {{ title }}
           </button>

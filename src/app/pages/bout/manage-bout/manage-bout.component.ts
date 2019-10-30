@@ -17,7 +17,9 @@ export class ManageBoutComponent implements OnInit {
   boutId: string;
   players: Player[];
   // dropdown button name
-  winners: string[];
+  ddNames: string[];
+  //
+  winners: Player[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -34,14 +36,15 @@ export class ManageBoutComponent implements OnInit {
     this.getBout();
     this.getPlayers();
     localStorage.setItem('boutId', this.boutId);
+    this.winners = new Array<Player>();
   }
 
   private selectWinner(chosen: Player) {
     const index = this.players.indexOf(chosen);
     if (index % 2 !== 0) {
-      this.winners[index - 1] = chosen.name;
+      this.ddNames[index - 1] = chosen.name;
     } else {
-      this.winners[index] = chosen.name;
+      this.ddNames[index] = chosen.name;
     }
   }
 
@@ -63,12 +66,40 @@ export class ManageBoutComponent implements OnInit {
         this.players = data.playersList;
         //
 
-        this.winners = new Array<string>(this.players.length);
-        this.winners.fill('Pick a winner');
+        this.ddNames = new Array<string>(this.players.length);
+        this.ddNames.fill('Pick a winner');
       }
     });
   }
 
-  private getWinners() {
+  private confirmWinners() {
+    // empty winners array
+    this.winners.length = 0;
+    // find players and add to winners array;
+    this.ddNames.forEach(name => {
+      if (this.players.find(x => x.name === name) && !this.winners.find(x => x.name === name)) {
+        this.winners.push(this.players.find(x => x.name === name));
+      }
+    });
+    this.proceedToNextBout();
+  }
+
+  private proceedToNextBout() {
+    const nextBout = new Bout();
+    nextBout.number = this.bout.number + 1;
+    nextBout.maxNumOfPlayers = this.bout.maxNumOfPlayers / 2;
+    nextBout.tourneyId = this.bout.tourneyId;
+    this.boutService.addBout(nextBout).subscribe(data => {
+      if (data.success) {
+        this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeOut: 3000 });
+        const nextBoutId = data.bout['_id'];
+        this.winners.forEach(winner => {
+          // service add player;
+        });
+      } else {
+        this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeOut: 3000 });
+      }
+      this.router.navigate(['/manage_tourney/' + this.bout.tourneyId]);
+    });
   }
 }

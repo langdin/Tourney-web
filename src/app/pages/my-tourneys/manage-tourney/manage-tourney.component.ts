@@ -76,7 +76,7 @@ export class ManageTourneyComponent implements OnInit {
       this.boutService.addBout(bout).subscribe(data => {
         if (data.success) {
           this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeOut: 3000 });
-
+          console.log(data);
         } else {
           this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeOut: 3000 });
         }

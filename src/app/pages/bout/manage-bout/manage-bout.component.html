@@ -47,7 +47,7 @@
               <div class="text-right">
                   <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ winners[i] }}
+                        {{ ddNames[i] }}
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <button class="dropdown-item" (click)="selectWinner(players[i])">{{ players[i].name }}</button>
@@ -60,7 +60,7 @@
         </div>
       </div>
       <div class="col-md-12 text-right mt-4">
-        <button class="btn btn-success">Confirm Winners</button>
+        <button class="btn btn-success" (click)="confirmWinners()">Confirm Winners</button>
       </div>
     </div>
   </div>
