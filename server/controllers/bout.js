@@ -1,4 +1,5 @@
 let boutModel = require("../models/bout");
+let tourneyModel = require("../models/tourney");
 
 module.exports.GetBoutList = (req, res, next) => {
   // find all
@@ -55,7 +56,6 @@ module.exports.ProcessAddBout = (req, res, next) => {
     maxNumOfPlayers: req.body.maxNumOfPlayers,
     tourneyId: req.body.tourneyId
   });
-
   // save
   newBout.save((err, boutModel) => {
     if (err) {

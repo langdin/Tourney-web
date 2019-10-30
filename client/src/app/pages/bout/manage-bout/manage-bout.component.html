@@ -40,8 +40,27 @@
       </div>
       <div class="col-md-6 no-p-m">
         <div *ngFor="let player of players; let last = last">
-          <div class="bracket" *ngIf="!last"></div>
+          <div class="bracket" *ngIf="!last">
+              <div class="player-body col-md-12 pt-4">
+                  <div class="text-right">
+                      <span>Choose Winner</span>
+                      <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown button
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+          </div>
         </div>
+      </div>
+      <div class="col-md-12 text-right mt-4">
+        <button class="btn btn-success">Confirm Winners</button>
       </div>
     </div>
   </div>

@@ -85,6 +85,18 @@ export class ManageTourneyComponent implements OnInit {
     }
   }
 
+  private removeBout(id: string) {
+    this.boutService.deleteBout(id).subscribe(data => {
+      if (data.success) {
+        this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeOut: 3000 });
+
+      } else {
+        this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeOut: 3000 });
+      }
+      this.router.navigate(['/manage_tourney/' + this.tourneyId]);
+    });
+  }
+
 
 // tslint:disable-next-line: use-life-cycle-interface
 ngOnDestroy() {
