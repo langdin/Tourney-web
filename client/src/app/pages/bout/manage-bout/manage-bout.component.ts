@@ -16,9 +16,8 @@ export class ManageBoutComponent implements OnInit {
   bout: Bout;
   boutId: string;
   players: Player[];
-  winners: Player[];
   // dropdown button name
-  ddName: string;
+  winners: string[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -35,12 +34,15 @@ export class ManageBoutComponent implements OnInit {
     this.getBout();
     this.getPlayers();
     localStorage.setItem('boutId', this.boutId);
-    this.ddName = 'Pick a winner';
   }
 
   private selectWinner(chosen: Player) {
-    //console.log(name);
-    this.ddName = chosen.name;
+    const index = this.players.indexOf(chosen);
+    if (index % 2 !== 0) {
+      this.winners[index - 1] = chosen.name;
+    } else {
+      this.winners[index] = chosen.name;
+    }
   }
 
   private getBout() {
@@ -59,6 +61,10 @@ export class ManageBoutComponent implements OnInit {
     this.playerService.getPlayersByBout(this.boutId).subscribe(data => {
       if (data.success) {
         this.players = data.playersList;
+        //
+
+        this.winners = new Array<string>(this.players.length);
+        this.winners.fill('Pick a winner');
       }
     });
   }

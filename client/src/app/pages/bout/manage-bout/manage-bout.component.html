@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="col-md-6 no-p-m">
-        <div *ngFor="let player of players; let last = last; let i = index; let even = even">
+        <div *ngFor="let player of players; let last = last; let i = index; let even = even;">
           <div class="margin-box col-md-12"></div>
           <div class="bracket" *ngIf="even">
             <div class="margin-box col-md-12"></div>
@@ -47,11 +47,11 @@
               <div class="text-right">
                   <div class="dropdown">
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ ddName }}
+                        {{ winners[i] }}
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <button class="dropdown-item" (click)="selectWinner(player)">{{ players[i].name }}</button>
-                        <button class="dropdown-item" *ngIf="players[i+1]" (click)="selectWinner(player)">{{ players[i+1].name }}</button>
+                        <button class="dropdown-item" (click)="selectWinner(players[i])">{{ players[i].name }}</button>
+                        <button class="dropdown-item" *ngIf="players[i+1]" (click)="selectWinner(players[i+1])">{{ players[i+1].name }}</button>
                       </div>
                   </div>
               </div>
