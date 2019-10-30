@@ -33,4 +33,8 @@ export class BoutService {
   public addBout(bout: Bout): Observable<any> {
     return this.httpClient.post(this.endpoint + 'add', bout, this.httpOptions);
   }
+
+  public deleteBout(boutId: string): Observable<any> {
+    return this.httpClient.get(this.endpoint + 'delete/' + boutId, this.httpOptions);
+  }
 }

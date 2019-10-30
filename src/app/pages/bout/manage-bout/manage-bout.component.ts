@@ -16,6 +16,7 @@ export class ManageBoutComponent implements OnInit {
   bout: Bout;
   boutId: string;
   players: Player[];
+  winners: Player[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -52,5 +53,8 @@ export class ManageBoutComponent implements OnInit {
         this.players = data.playersList;
       }
     });
+  }
+
+  private getWinners() {
   }
 }

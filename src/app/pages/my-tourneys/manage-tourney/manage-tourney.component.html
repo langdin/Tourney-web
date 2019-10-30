@@ -15,6 +15,7 @@
             <div class="card-body">
               <h5 class="card-title">Round {{ bout.number }}</h5>
               <a routerLink="/manage_bout/{{ bout._id }}" class="btn btn-primary">Go</a>
+              <a routerLink="/manage_bout/delete/{{ tourneyId }}/{{ bout._id }}" class="btn btn-warning">Delete</a>
             </div>
         </div>
         <div class="col-md-12 text-center">

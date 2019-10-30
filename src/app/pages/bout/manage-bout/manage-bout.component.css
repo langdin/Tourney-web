@@ -35,6 +35,12 @@
   color: #006699;
 }
 
+.player-winnner-name {
+  font-size: 1.4em;
+  margin-right: 20px;
+  color: #006699;
+}
+
 .edit {
   cursor: pointer;
 }
