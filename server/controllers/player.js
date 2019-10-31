@@ -20,7 +20,7 @@ module.exports.GetPlayersList = (req, res, next) => {
 module.exports.GetPlayersByBout = (req, res, next) => {
   let boutId = req.params.id;
   // find all
-  playerModel.find({boutId}, (err, playersList) => {
+  playerModel.find({bouts: {'$elemMatch': {boutId: {'$in' : boutId}}}}, (err, playersList) => {
     if (err) {
       return console.error(err);
     } else {
@@ -35,20 +35,23 @@ module.exports.GetPlayersByBout = (req, res, next) => {
 };
 
 module.exports.ProcessAddPlayer = (req, res, next) => {
+
+  const boutNum = req.params.boutnum;
+
   // new
   let newPlayer = playerModel({
     name: req.body.name,
     points: req.body.points,
-    bouts: req.body.boutId
+    bouts: req.body.bouts
   });
 
   // find players in bout
-  boutModel.findOne({ _id: newPlayer.boutId }, (err, bout) => {
+  boutModel.findOne({ _id: newPlayer.bouts[boutNum].boutId }, (err, bout) => {
     if (err) {
       return console.error(err);
     } else {
       // find all players by bout
-      playerModel.find({ boutId: newPlayer.boutId }, (err, playersList) => {
+      playerModel.find({ boutId: newPlayer.bouts[boutNum].boutId}, (err, playersList) => {
         if (err) {
           return console.error(err);
         } else {

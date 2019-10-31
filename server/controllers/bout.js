@@ -1,5 +1,5 @@
 let boutModel = require("../models/bout");
-let tourneyModel = require("../models/tourney");
+let playerModel = require("../models/player");
 
 module.exports.GetBoutList = (req, res, next) => {
   // find all
@@ -71,14 +71,23 @@ module.exports.PerformDelete = (req, res, next) => {
   // get id
   let id = req.params.id;
 
+  // remove players in bout
+  playerModel.remove({boutId: id}, err => {
+    if(err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      // then remove bout itself
+      boutModel.remove({_id: id}, (err) => {
+        if(err) {
+            console.log(err);
+            res.end(err);
+        } else {
+            res.json({success: true, msg: 'Successfully Deleted Bout and Players of this Bout'});
+        }
+      });
+    }
+  })
   // delete
-  boutModel.remove({_id: id}, (err) => {
-      if(err) {
-          console.log(err);
-          res.end(err);
-      }
-      else {
-          res.json({success: true, msg: 'Successfully Deleted Bout'});
-      }
-  });
+
 }

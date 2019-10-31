@@ -65,7 +65,7 @@ export class ManageBoutComponent implements OnInit {
       if (data.success) {
         this.players = data.playersList;
         //
-
+        console.log(data);
         this.ddNames = new Array<string>(this.players.length);
         this.ddNames.fill('Pick a winner');
       }

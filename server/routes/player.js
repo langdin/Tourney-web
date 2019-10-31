@@ -12,13 +12,13 @@ router.get('/', playerController.GetPlayersList);
 router.get('/by_bout/:id', playerController.GetPlayersByBout);
 
 /* POST - processes the add player */
-router.post('/add', playerController.ProcessAddPlayer);
+router.post('/add/:boutnum', playerController.ProcessAddPlayer);
 
 /* GET - get player by id */
 router.get('/:id', playerController.GetPlayerById);
 
 /* POST - processes the add player */
-router.post('/edit/:id', playerController.ProcessEditPlayer);
+router.post('/edit/:boutnum/:id', playerController.ProcessEditPlayer);
 
 /* GET - perform delete player */
 router.get('/delete/:id', playerController.PerformDelete);

@@ -27,16 +27,16 @@ export class PlayerService {
     return this.httpClient.get(this.endpoint + 'by_bout/' + boutId, this.httpOptions);
   }
 
-  public addPlayer(player: Player): Observable<any> {
-    return this.httpClient.post(this.endpoint + 'add/', player, this.httpOptions);
+  public addPlayer(player: Player, boutNum: number): Observable<any> {
+    return this.httpClient.post(this.endpoint + 'add/' + boutNum, player, this.httpOptions);
   }
 
   public getPlayersById(id: string): Observable<any> {
     return this.httpClient.get(this.endpoint + id, this.httpOptions);
   }
 
-  public updatePlayer(updatedPlayer: Player): Observable<any> {
-    return this.httpClient.post(this.endpoint + 'edit/' + updatedPlayer._id, updatedPlayer, this.httpOptions);
+  public updatePlayer(updatedPlayer: Player, boutNum: number): Observable<any> {
+    return this.httpClient.post(this.endpoint + 'edit/' + boutNum + '/' + updatedPlayer._id, updatedPlayer, this.httpOptions);
   }
 
   public deletePlayers(id: string): Observable<any> {
