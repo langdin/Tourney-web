@@ -28,8 +28,8 @@ const routes: Routes = [
   {path: 'manage_bout/:id', component: ManageBoutComponent, canActivate: [AuthGuard]},
   {path: 'manage_bout/delete/:tid/:bid', component: BoutDeleteComponent, canActivate: [AuthGuard]},
 
-  {path: 'players/add', component: PlayerDetailsComponent, data: {title: 'Add Participant'}, canActivate: [AuthGuard]},
-  {path: 'players/edit/:id', component: PlayerDetailsComponent, data: {title: 'Edit Participant'}, canActivate: [AuthGuard]}
+  {path: 'players/add/:boutid', component: PlayerDetailsComponent, data: {title: 'Add Participant'}, canActivate: [AuthGuard]},
+  {path: 'players/edit/:boutid/:playerid', component: PlayerDetailsComponent, data: {title: 'Edit Participant'}, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
