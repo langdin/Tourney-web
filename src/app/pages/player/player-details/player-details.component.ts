@@ -96,7 +96,7 @@ export class PlayerDetailsComponent implements OnInit {
         }
       });
     } else if (this.title === 'Edit Participant') {
-      this.playerService.updatePlayer(this.player, this.boutNum).subscribe(data => {
+      this.playerService.updatePlayer(this.player).subscribe(data => {
         if (data.success) {
           this.flashMessage.show(data.msg, {cssClass: 'alert-success', timeOut: 3000});
           this.router.navigate(['/manage_bout/' + this.boutId]);

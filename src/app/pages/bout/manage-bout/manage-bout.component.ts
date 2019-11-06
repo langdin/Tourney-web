@@ -18,8 +18,10 @@ export class ManageBoutComponent implements OnInit {
   players: Player[];
   // dropdown button name
   ddNames: string[];
-  //
+  // array of winners
   winners: Player[];
+  // confirm button clicked
+  clicked: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -37,6 +39,7 @@ export class ManageBoutComponent implements OnInit {
     this.getPlayers();
     localStorage.setItem('boutId', this.boutId);
     this.winners = new Array<Player>();
+    this.clicked = false;
   }
 
   private selectWinner(chosen: Player) {
@@ -73,6 +76,8 @@ export class ManageBoutComponent implements OnInit {
   }
 
   private confirmWinners() {
+    // button clicked
+    this.clicked = true;
     // empty winners array
     this.winners.length = 0;
     // find players and add to winners array;
@@ -81,7 +86,11 @@ export class ManageBoutComponent implements OnInit {
         this.winners.push(this.players.find(x => x.name === name));
       }
     });
-    this.proceedToNextBout();
+    if (this.winners.length !== 0) {
+
+    }
+    console.log(this.ddNames);
+   //  this.proceedToNextBout();
   }
 
   private proceedToNextBout() {
@@ -89,12 +98,21 @@ export class ManageBoutComponent implements OnInit {
     nextBout.number = this.bout.number + 1;
     nextBout.maxNumOfPlayers = this.bout.maxNumOfPlayers / 2;
     nextBout.tourneyId = this.bout.tourneyId;
+
+    // create next bout
     this.boutService.addBout(nextBout).subscribe(data => {
       if (data.success) {
-        this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeOut: 3000 });
+        // if success
         const nextBoutId = data.bout['_id'];
+
+        // add players to new bout
         this.winners.forEach(winner => {
           // service add player;
+          this.playerService.updatePlayer(winner).subscribe(dataP => {
+            if (dataP.success) {
+              this.flashMessage.show(dataP.msg, { cssClass: 'alert-success', timeOut: 3000 });
+            }
+          })
         });
       } else {
         this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeOut: 3000 });

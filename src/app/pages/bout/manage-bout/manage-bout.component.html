@@ -61,6 +61,11 @@
       </div>
       <div class="col-md-12 text-right mt-4">
         <button class="btn btn-success" (click)="confirmWinners()">Confirm Winners</button>
+        <br />
+        <span
+            class="badge badge-danger"
+            *ngIf="this.winners.length < 2 && this.clicked && (this.ddNames[0] === this.ddNames[1] || this.ddNames[2] === this.ddNames[3])"
+        >Please, choose winners.</span>
       </div>
     </div>
   </div>
