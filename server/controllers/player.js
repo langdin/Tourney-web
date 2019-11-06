@@ -96,6 +96,8 @@ module.exports.GetPlayerById = (req, res, next) => {
 };
 
 module.exports.ProcessEditPlayer = (req, res, next) => {
+  // get bout number
+  // let boutNum = req.params.boutnum;
   // get id
   let id = req.params.id;
 
@@ -104,7 +106,7 @@ module.exports.ProcessEditPlayer = (req, res, next) => {
     _id: id,
     name: req.body.name,
     points: req.body.points,
-    bouts: req.body.boutId
+    bouts: req.body.bouts
   });
 
   // update

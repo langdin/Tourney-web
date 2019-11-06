@@ -35,8 +35,8 @@ export class PlayerService {
     return this.httpClient.get(this.endpoint + id, this.httpOptions);
   }
 
-  public updatePlayer(updatedPlayer: Player, boutNum: number): Observable<any> {
-    return this.httpClient.post(this.endpoint + 'edit/' + boutNum + '/' + updatedPlayer._id, updatedPlayer, this.httpOptions);
+  public updatePlayer(updatedPlayer: Player): Observable<any> {
+    return this.httpClient.post(this.endpoint + 'edit/' + updatedPlayer._id, updatedPlayer, this.httpOptions);
   }
 
   public deletePlayers(id: string): Observable<any> {

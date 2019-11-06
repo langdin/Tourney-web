@@ -17,8 +17,8 @@ router.post('/add/:boutnum', playerController.ProcessAddPlayer);
 /* GET - get player by id */
 router.get('/:id', playerController.GetPlayerById);
 
-/* POST - processes the add player */
-router.post('/edit/:boutnum/:id', playerController.ProcessEditPlayer);
+/* POST - processes the update player */
+router.post('/edit/:id', playerController.ProcessEditPlayer);
 
 /* GET - perform delete player */
 router.get('/delete/:id', playerController.PerformDelete);
