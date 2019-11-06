@@ -98,10 +98,10 @@ export class ManageTourneyComponent implements OnInit {
   }
 
 
-// tslint:disable-next-line: use-life-cycle-interface
-ngOnDestroy() {
-  if (this.mySubscription) {
-    this.mySubscription.unsubscribe();
+  // tslint:disable-next-line: use-life-cycle-interface
+  ngOnDestroy() {
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
   }
-}
 }

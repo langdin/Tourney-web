@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { BoutService } from 'src/app/services/bout.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Bout } from 'src/app/models/bout';
@@ -23,13 +23,27 @@ export class ManageBoutComponent implements OnInit {
   // confirm button clicked
   clicked: boolean;
 
+  // for reload purposes
+  mySubscription: any;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private playerService: PlayerService,
     private boutService: BoutService,
     private flashMessage: FlashMessagesService,
     private router: Router
-    ) { }
+    ) {
+      this.router.routeReuseStrategy.shouldReuseRoute =  () => {
+        return false;
+      };
+
+      this.mySubscription = this.router.events.subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          // Trick the Router into believing it's last link wasn't previously loaded
+          this.router.navigated = false;
+        }
+      });
+     }
 
   ngOnInit() {
     this.bout = new Bout();
@@ -89,8 +103,8 @@ export class ManageBoutComponent implements OnInit {
     if (this.winners.length !== 0) {
 
     }
-    console.log(this.ddNames);
-   //  this.proceedToNextBout();
+    // console.log(this.winners);
+    this.proceedToNextBout();
   }
 
   private proceedToNextBout() {
@@ -104,20 +118,34 @@ export class ManageBoutComponent implements OnInit {
       if (data.success) {
         // if success
         const nextBoutId = data.bout['_id'];
-
+        let go = 'n';
         // add players to new bout
         this.winners.forEach(winner => {
           // service add player;
+          winner.bouts[nextBout.number].boutId = nextBoutId;
           this.playerService.updatePlayer(winner).subscribe(dataP => {
             if (dataP.success) {
-              this.flashMessage.show(dataP.msg, { cssClass: 'alert-success', timeOut: 3000 });
+              // success
+              go = 'y';
+            } else {
+              this.flashMessage.show(dataP.msg, { cssClass: 'alert-danger', timeOut: 3000 });
+              this.router.navigate(['/manage_tourney/' + this.bout.tourneyId]);
             }
-          })
+          });
         });
+        this.router.navigate(['/manage_bout/' + nextBoutId]);
+
       } else {
         this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeOut: 3000 });
+        this.router.navigate(['/manage_tourney/' + this.bout.tourneyId]);
       }
-      this.router.navigate(['/manage_tourney/' + this.bout.tourneyId]);
     });
+  }
+
+  // tslint:disable-next-line: use-life-cycle-interface
+  ngOnDestroy() {
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
   }
 }
