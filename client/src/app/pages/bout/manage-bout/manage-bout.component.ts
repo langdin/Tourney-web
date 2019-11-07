@@ -24,6 +24,8 @@ export class ManageBoutComponent implements OnInit {
   clicked: boolean;
   // button text
   btnText: string;
+  // next bout exist
+  nextBoutId: string;
 
   // for reload purposes
   mySubscription: any;
@@ -48,6 +50,7 @@ export class ManageBoutComponent implements OnInit {
      }
 
   ngOnInit() {
+    this.nextBoutId = '';
     this.btnText = 'Confirm Winners';
     this.bout = new Bout();
     this.players = new Array<Player>();
@@ -85,13 +88,24 @@ export class ManageBoutComponent implements OnInit {
       if (data.success) {
         this.players = data.playersList;
         //
-        console.log(data);
+        console.log(this.players);
         this.ddNames = new Array<string>(this.players.length);
-        this.ddNames.fill('Pick a winner');
+        if (this.players.length > 1) {
+          this.ddNames.fill('Pick a winner');
+        } else if (this.players.length === 1) {
+          this.ddNames.fill('Winner of the Tournament');
+        }
 
         if (this.players.length === 2) {
           this.btnText = 'Confirm Tournament Winner';
         }
+        this.players.forEach(player => {
+
+          if (player.bouts[this.bout.number].boutId !== '') {
+            this.nextBoutId = player.bouts[this.bout.number].boutId;
+            this.btnText = 'Go to the Next Round';
+          }
+        });
       }
     });
   }
@@ -107,12 +121,18 @@ export class ManageBoutComponent implements OnInit {
         this.winners.push(this.players.find(x => x.name === name));
       }
     });
-    console.log(this.winners.length);
-    if (this.winners.length === this.players.length / 2) {
+
+    // if next bout ID is empty and user picked all winners for the bout
+    if (this.winners.length === this.players.length / 2 && this.nextBoutId === '') {
+      // proceed
       this.proceedToNextBout();
+    } else {
+      // else go to next bout
+      this.router.navigate(['/manage_bout/' + this.nextBoutId]);
     }
     // console.log(this.winners);
   }
+
 
   private proceedToNextBout() {
     const nextBout = new Bout();
@@ -125,15 +145,14 @@ export class ManageBoutComponent implements OnInit {
       if (data.success) {
         // if success
         const nextBoutId = data.bout['_id'];
-        let go = 'n';
         // add players to new bout
         this.winners.forEach(winner => {
-          // service add player;
+          // update players bouts array
+          // add next bout id to bouts array
           winner.bouts[nextBout.number - 1].boutId = nextBoutId;
           this.playerService.updatePlayer(winner).subscribe(dataP => {
             if (dataP.success) {
               // success
-              go = 'y';
             } else {
               this.flashMessage.show(dataP.msg, { cssClass: 'alert-danger', timeOut: 3000 });
               this.router.navigate(['/manage_tourney/' + this.bout.tourneyId]);
