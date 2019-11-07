@@ -22,6 +22,8 @@ export class ManageBoutComponent implements OnInit {
   winners: Player[];
   // confirm button clicked
   clicked: boolean;
+  // button text
+  btnText: string;
 
   // for reload purposes
   mySubscription: any;
@@ -46,6 +48,7 @@ export class ManageBoutComponent implements OnInit {
      }
 
   ngOnInit() {
+    this.btnText = 'Confirm Winners';
     this.bout = new Bout();
     this.players = new Array<Player>();
     this.boutId = this.activatedRoute.snapshot.params.id;
@@ -85,6 +88,10 @@ export class ManageBoutComponent implements OnInit {
         console.log(data);
         this.ddNames = new Array<string>(this.players.length);
         this.ddNames.fill('Pick a winner');
+
+        if (this.players.length === 2) {
+          this.btnText = 'Confirm Tournament Winner';
+        }
       }
     });
   }
@@ -100,11 +107,11 @@ export class ManageBoutComponent implements OnInit {
         this.winners.push(this.players.find(x => x.name === name));
       }
     });
-    if (this.winners.length !== 0) {
-
+    console.log(this.winners.length);
+    if (this.winners.length === this.players.length / 2) {
+      this.proceedToNextBout();
     }
     // console.log(this.winners);
-    this.proceedToNextBout();
   }
 
   private proceedToNextBout() {
@@ -122,7 +129,7 @@ export class ManageBoutComponent implements OnInit {
         // add players to new bout
         this.winners.forEach(winner => {
           // service add player;
-          winner.bouts[nextBout.number].boutId = nextBoutId;
+          winner.bouts[nextBout.number - 1].boutId = nextBoutId;
           this.playerService.updatePlayer(winner).subscribe(dataP => {
             if (dataP.success) {
               // success
