@@ -20,7 +20,7 @@ module.exports.GetPlayersList = (req, res, next) => {
 module.exports.GetPlayersByBout = (req, res, next) => {
   let boutId = req.params.id;
   // find all
-  playerModel.find({bouts: {'$elemMatch': {boutId: {'$in' : boutId}}}}, (err, playersList) => {
+  playerModel.find({bouts: {'$elemMatch': {boutId : boutId}}}, (err, playersList) => {
     if (err) {
       return console.error(err);
     } else {
