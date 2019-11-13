@@ -12,11 +12,11 @@
               <h5 class="card-title">{{ tourney.name }}</h5>
               <h6
                 class="card-subtitle mb-2"
-                [ngClass]="
-                  tourney.status === 'Active'
-                    ? 'text-success'
-                    : 'text-secondary'
-                "
+                [ngClass]="{
+                  'text-success': tourney.status === 'Active',
+                  'text-warning': tourney.status === 'Completed',
+                  'text-secondary': tourney.status === 'Not Active'
+                }"
               >
                 {{ tourney.status }}
               </h6>
