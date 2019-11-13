@@ -36,6 +36,18 @@
           />
         </fieldset>
         <fieldset class="form-group">
+          <div class="dropdown">
+              <button class="btn btn-light btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ ddStatus }}
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" (click)="selectStatus('Not Active')">Not Active</a>
+                <a class="dropdown-item" (click)="selectStatus('Active')">Active</a>
+                <a class="dropdown-item" (click)="selectStatus('Completed')">Completed</a>
+              </div>
+          </div>
+        </fieldset>
+        <fieldset class="form-group">
           <label>Number of Participants</label>
           <div class="dropdown">
               <button [disabled]="disabled" class="btn btn-light btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -55,7 +67,7 @@
         </fieldset>
 
         <fieldset class="form-group text-center">
-          <button type="submit" class="btn btn-primary" [disabled]="form.invalid || ddNum ==='Choose Number'">
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid || ddNum ==='Select Number' || ddStatus === 'Select Status'">
             <i class="fa fa-edit"></i>
             {{ title }}
           </button>

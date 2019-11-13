@@ -46,7 +46,7 @@
             <div class="player-body col-md-12">
               <div class="text-right">
                   <div class="dropdown">
-                      <button [disabled]="this.players.length === 1" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <button [disabled]="this.players.length === 1 || nextBoutId" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ ddNames[i] }}
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
