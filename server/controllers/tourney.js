@@ -93,7 +93,6 @@ module.exports.ProcessEditTourney = (req, res, next) => {
       console.log(err);
       res.end(err);
     } else {
-      boutModel.
       res.json({
         success: true,
         msg: "Successfully Updated Tourney",
