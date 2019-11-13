@@ -104,8 +104,21 @@ export class ManageBoutComponent implements OnInit {
           if (player.bouts[this.bout.number].boutId !== '') {
             this.nextBoutId = player.bouts[this.bout.number].boutId;
             this.btnText = 'Go to the Next Round';
+
+            this.ddNames = new Array<string>();
+            this.getPlayersFromNextBout();
           }
         });
+      }
+    });
+  }
+
+  private getPlayersFromNextBout() {
+    this.players.forEach(player => {
+
+      if (player.bouts[this.bout.number].boutId !== '') {
+        this.ddNames.push(player.name);
+        this.ddNames.push(player.name);
       }
     });
   }

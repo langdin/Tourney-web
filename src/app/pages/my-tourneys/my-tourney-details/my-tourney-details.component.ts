@@ -18,6 +18,7 @@ export class MyTourneyDetailsComponent implements OnInit {
   tourneyId: string;
   // dropdown text
   ddNum: string;
+  ddStatus: string;
   //
   disabled: boolean;
 
@@ -40,7 +41,8 @@ export class MyTourneyDetailsComponent implements OnInit {
       this.getTourney();
       this.disabled = true;
     }
-    this.ddNum = 'Choose Number';
+    this.ddNum = 'Select Number';
+    this.ddStatus = 'Select Status';
   }
 
   private getTourney() {
@@ -52,12 +54,15 @@ export class MyTourneyDetailsComponent implements OnInit {
     });
   }
 
-  public onDetailsPageSubmit() {
+  private onDetailsPageSubmit() {
+    if (this.isNameEmpty()) {
+      return;
+    }
     this.tourney.ownerId = this.currentUser['id'];
     this.tourney.numberOfPlayers = +this.ddNum;
+    this.tourney.status = this.ddStatus;
     if (this.title === 'Add Tourney') {
       // Add New Tourney
-      this.tourney.status = 'Not Active';
       this.tourneyService.addTourney(this.tourney).subscribe(data => {
         if (data.success) {
           this.flashMessage.show(data.msg, {cssClass: 'alert-success', timeOut: 3000});
@@ -81,6 +86,10 @@ export class MyTourneyDetailsComponent implements OnInit {
     }
   }
 
+  private selectStatus(status: string) {
+    this.ddStatus = status;
+  }
+
   private isLoggedIn(): boolean {
     const result = this.authService.loggedIn();
     if (result) {
@@ -91,5 +100,13 @@ export class MyTourneyDetailsComponent implements OnInit {
 
   private selectNumOfPlayers(num: string) {
     this.ddNum = num;
+  }
+
+  private isNameEmpty() {
+    this.tourney.name = this.tourney.name.trim();
+    if (this.tourney.name.length === 0) {
+      return true;
+    }
+    return false;
   }
 }
