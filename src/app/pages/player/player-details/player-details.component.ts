@@ -39,12 +39,11 @@ export class PlayerDetailsComponent implements OnInit {
     this.title = this.activatedRoute.snapshot.data.title;
     this.playerId = this.activatedRoute.snapshot.params.playerid;
     this.boutId = this.activatedRoute.snapshot.params.boutid;
-    this.getBout();
     this.player = new Player();
+    this.getBout();
     if (this.title === 'Edit Participant') {
       this.getPlayer();
     }
-    //console.log(this.player);
   }
 
   private getPlayer() {
