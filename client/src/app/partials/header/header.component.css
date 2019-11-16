@@ -7,8 +7,8 @@
   color: #6c757d !important;
 }
 
-.btn-welcom-user {
-  color: #7FDBFF !important;
+.btn-welcome-user {
+  color: #3D9970 !important;
 }
 
 .header-logo {
@@ -17,4 +17,5 @@
 
 .nav-scroller {
   border-bottom: 1px solid #e5e5e5;
+  font-weight: 700;
 }
