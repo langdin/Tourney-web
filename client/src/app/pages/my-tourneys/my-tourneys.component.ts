@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
+import { BoutService } from 'src/app/services/bout.service';
 
 @Component({
   selector: 'app-my-tourneys',
@@ -18,8 +19,14 @@ export class MyTourneysComponent implements OnInit {
   userId: string;
   tourneyId: string;
 
+  // modal dialog
+  modalHeader: string;
+  modalBody: string;
+  modalBtn: string;
+
   constructor(
     private tourneysService: MyTourneysService,
+    private boutService: BoutService,
     private authService: AuthService,
     private flashMessage: FlashMessagesService,
     private router: Router
@@ -31,7 +38,7 @@ export class MyTourneysComponent implements OnInit {
     this.isLoggedIn();
     this.userId = this.currentUser['id'];
     this.displayUserTourneys();
-
+    this.restModal();
   }
 
   private displayUserTourneys() {
@@ -48,7 +55,27 @@ export class MyTourneysComponent implements OnInit {
     return result;
   }
 
-  getId(id: string) {
+  private getId(id: string) {
     this.tourneyId = id;
+    this.tourneys.forEach(tourney => {
+      if (tourney['_id'] === this.tourneyId) {
+        this.boutService.getBoutsByTourney(this.tourneyId).subscribe(data => {
+          if (data.boutList.length !== 0) {
+            console.log(data.boutList);
+            this.modalHeader = 'Warning';
+            this.modalBody = 'You have to delete all bouts from this Tourney first.';
+            this.modalBtn = 'Ok';
+          } else {
+            this.restModal();
+          }
+        });
+      }
+    });
+  }
+
+  private restModal() {
+    this.modalHeader = 'Are you sure?';
+    this.modalBody = 'This action cannot be undone';
+    this.modalBtn = 'Delete';
   }
 }

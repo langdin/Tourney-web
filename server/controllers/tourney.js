@@ -1,5 +1,4 @@
 let tourneyModel = require("../models/tourney");
-let boutModel = require("../models/bout");
 
 module.exports.GetTourneysList = (req, res, next) => {
   // find all
@@ -20,7 +19,7 @@ module.exports.GetTourneysList = (req, res, next) => {
 module.exports.GetUserTourneysList = (req, res, next) => {
   let userId = req.body.userId;
   // find user tourneys
-  tourneyModel.find({ownerId: userId}, (err, tourneyList) => {
+  tourneyModel.find({ ownerId: userId }, (err, tourneyList) => {
     if (err) {
       return console.error(err);
     } else {
@@ -115,7 +114,7 @@ module.exports.PerformDelete = (req, res, next) => {
           res.end(err);
       }
       else {
-          res.json({success: true, msg: 'Successfully Deleted Tourney'});
+        res.json({success: true, msg: 'Successfully Deleted Tourney'});
       }
   });
 }
