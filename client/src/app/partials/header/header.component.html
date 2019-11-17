@@ -18,10 +18,10 @@
       <nav class="nav d-flex justify-content-between">
         <a class="p-2 text-muted" routerLink="/">Home</a>
         <a class="p-2 text-muted" routerLink="/about">About</a>
+        <a class="p-2 text-muted" routerLink="/all_tourneys">Tournaments</a>
         <a class="p-2 text-muted" routerLink="/my_tourneys">Manage My Tourneys</a>
         <a class="p-2 text-muted" routerLink="/contact">Contact</a>
-        <a class="p-2 text-muted" routerLink="/my-info">MyInfo</a>
-        <a class="p-2 text-muted" *ngIf="!isLoggedIn()" routerLink="/login" >Login</a>
+        <a class="p-2 text-muted" *ngIf="isLoggedIn()" routerLink="/my-info">MyInfo</a>
         <!--
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
