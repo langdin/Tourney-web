@@ -24,6 +24,7 @@ import { ManageBoutComponent } from './pages/bout/manage-bout/manage-bout.compon
 import { PlayerDetailsComponent } from './pages/player/player-details/player-details.component';
 import { BoutDeleteComponent } from './pages/bout/bout-delete/bout-delete.component';
 import { AboutComponent } from './pages/about/about.component';
+import { AllTourneysComponent } from './pages/all-tourneys/all-tourneys.component';
 
 export function jwtTokenGetter() {
   return localStorage.getItem('id_token');
@@ -45,7 +46,8 @@ export function jwtTokenGetter() {
     ManageBoutComponent,
     PlayerDetailsComponent,
     BoutDeleteComponent,
-    AboutComponent
+    AboutComponent,
+    AllTourneysComponent
   ],
   imports: [
     BrowserModule,

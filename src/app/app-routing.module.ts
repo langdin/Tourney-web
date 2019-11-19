@@ -12,11 +12,13 @@ import { ManageBoutComponent } from './pages/bout/manage-bout/manage-bout.compon
 import { PlayerDetailsComponent } from './pages/player/player-details/player-details.component';
 import { BoutDeleteComponent } from './pages/bout/bout-delete/bout-delete.component';
 import { AboutComponent } from './pages/about/about.component';
+import { AllTourneysComponent } from './pages/all-tourneys/all-tourneys.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'about', component: AboutComponent},
+  {path: 'all_tourneys', component: AllTourneysComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
 
