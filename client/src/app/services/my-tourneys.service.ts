@@ -23,6 +23,10 @@ export class MyTourneysService {
     private httpClient: HttpClient
   ) { }
 
+  public getAllTourneys(): Observable<any> {
+    return this.httpClient.get(this.endpoint, this.httpOptions);
+  }
+
   public getUserTourneys(userId: any): Observable<any> {
     return this.httpClient.post(this.endpoint + 'my', userId, this.httpOptions);
   }
