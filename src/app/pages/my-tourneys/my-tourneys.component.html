@@ -23,20 +23,20 @@
               <p class="card-text">{{ tourney.description }}</p>
               <a
                 routerLink="/manage_tourney/{{ tourney._id }}"
-                class="btn btn-dark btn-block"
+                class="btn btn-secondary btn-block"
               >
                 <i class="fas fa-award"></i>
               </a>
               <a
                 routerLink="/my_tourneys/edit/{{ tourney._id }}"
-                class="btn btn-dark btn-block"
+                class="btn btn-secondary btn-block"
               >
                 <i class="fas fa-pencil-alt"></i>
               </a>
               <a
                 data-toggle="modal"
                 data-target="#modalConfirm"
-                class="btn btn-dark btn-block text-light"
+                class="btn btn-secondary btn-block text-light"
                 (click)="getId(tourney._id)"
               >
                 <i class="fas fa-trash"></i>
