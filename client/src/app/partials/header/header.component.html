@@ -19,7 +19,7 @@
         <a class="p-2 text-muted" routerLink="/">Home</a>
         <a class="p-2 text-muted" routerLink="/about">About</a>
         <a class="p-2 text-muted" routerLink="/all_tourneys">Tournaments</a>
-        <a class="p-2 text-muted" routerLink="/my_tourneys">Manage My Tourneys</a>
+        <a class="p-2 text-muted" *ngIf="isLoggedIn()" routerLink="/my_tourneys">Manage My Tourneys</a>
         <a class="p-2 text-muted" routerLink="/contact">Contact</a>
         <a class="p-2 text-muted" *ngIf="isLoggedIn()" routerLink="/my-info">MyInfo</a>
         <!--

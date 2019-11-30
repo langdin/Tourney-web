@@ -9,18 +9,18 @@ let playerController = require('../controllers/player');
 router.get('/', playerController.GetPlayersList);
 
 /* GET - get Players by Bout ID */
-router.get('/by_bout/:id', playerController.GetPlayersByBout);
+router.get('/by_bout/:id', passport.authenticate('jwt', {session: false}), playerController.GetPlayersByBout);
 
 /* POST - processes the add player */
-router.post('/add/:boutnum', playerController.ProcessAddPlayer);
+router.post('/add/:boutnum', passport.authenticate('jwt', {session: false}), playerController.ProcessAddPlayer);
 
 /* GET - get player by id */
-router.get('/:id', playerController.GetPlayerById);
+router.get('/:id', passport.authenticate('jwt', {session: false}), playerController.GetPlayerById);
 
 /* POST - processes the update player */
-router.post('/edit/:id', playerController.ProcessEditPlayer);
+router.post('/edit/:id', passport.authenticate('jwt', {session: false}), playerController.ProcessEditPlayer);
 
 /* GET - perform delete player */
-router.get('/delete/:id', playerController.PerformDelete);
+router.get('/delete/:id', passport.authenticate('jwt', {session: false}), playerController.PerformDelete);
 
 module.exports = router;

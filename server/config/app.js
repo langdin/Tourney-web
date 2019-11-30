@@ -99,7 +99,7 @@ passport.use(strategy);
 
 app.use('/api', indexRouter);
 app.use('/players', playerRouter);
-app.use('/bouts', boutRouter);
+app.use('/bouts', passport.authenticate('jwt', {session: false}), boutRouter);
 app.use('/tourneys', tourneyRouter);
 //app.use('/api/contact-list', passport.authenticate('jwt', {session: false}), contactRouter);
 app.get('*', (req, res) => {

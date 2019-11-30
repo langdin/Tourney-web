@@ -13,6 +13,7 @@ import { PlayerDetailsComponent } from './pages/player/player-details/player-det
 import { BoutDeleteComponent } from './pages/bout/bout-delete/bout-delete.component';
 import { AboutComponent } from './pages/about/about.component';
 import { AllTourneysComponent } from './pages/all-tourneys/all-tourneys.component';
+import { ViewTourneyComponent } from './pages/view-tourney/view-tourney.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -21,6 +22,8 @@ const routes: Routes = [
   {path: 'all_tourneys', component: AllTourneysComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+
+  {path: 'view_tourney/:id', component: ViewTourneyComponent},
 
   {path: 'my_tourneys', component: MyTourneysComponent, canActivate: [AuthGuard]},
   {path: 'my_tourneys/add', component: MyTourneyDetailsComponent, data: {title: 'Add Tourney'}, canActivate: [AuthGuard]},
