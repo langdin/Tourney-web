@@ -33,6 +33,10 @@ export class PlayerService {
     return this.httpClient.get(this.endpoint + 'by_bout/' + boutId, this.httpOptions);
   }
 
+  public getPlayersByTourney(tourneyId: string): Observable<any> {
+    return this.httpClient.get(this.endpoint + 'by_tourney/' + tourneyId, this.httpOptions);
+  }
+
   public addPlayer(player: Player, boutNum: number): Observable<any> {
     this.loadToken();
     return this.httpClient.post(this.endpoint + 'add/' + boutNum, player, this.httpOptions);

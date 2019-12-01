@@ -7,7 +7,12 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{ tourney.name }}</h5>
-          <p class="card-text">{{ tourney.name }}</p>
+          <p class="card-text">{{ tourney.description }}</p>
+          <p class="card-text" [ngClass]="{
+            'text-success': tourney.status === 'Active',
+            'text-warning': tourney.status === 'Completed',
+            'text-secondary': tourney.status === 'Not Active'
+          }">{{ tourney.status }}</p>
           <a routerLink="/view_tourney/{{ tourney._id }}" class="btn btn-secondary float-right">Check</a>
         </div>
       </div>
