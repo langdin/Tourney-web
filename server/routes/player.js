@@ -21,6 +21,6 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), playerControl
 router.post('/edit/:id', passport.authenticate('jwt', {session: false}), playerController.ProcessEditPlayer);
 
 /* GET - perform delete player */
-router.get('/delete/:id', passport.authenticate('jwt', {session: false}), playerController.PerformDelete);
+router.get('/delete/:id', playerController.PerformDelete);
 
 module.exports = router;

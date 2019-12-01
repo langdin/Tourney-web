@@ -72,7 +72,7 @@ module.exports.PerformDelete = (req, res, next) => {
   let id = req.params.id;
 
   // remove players in bout
-  playerModel.remove({boutId: id}, err => {
+  playerModel.remove({bouts: {'$elemMatch': {boutId : id}}}, err => {
     if(err) {
       console.log(err);
       res.end(err);

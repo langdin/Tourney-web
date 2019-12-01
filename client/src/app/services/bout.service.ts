@@ -33,6 +33,7 @@ export class BoutService {
   }
 
   public getBoutsByTourney(tourneyId: string): Observable<any> {
+    this.loadToken();
     return this.httpClient.get(this.endpoint + 'by_tourney/' + tourneyId, this.httpOptions);
   }
 
