@@ -11,6 +11,9 @@ router.get('/', playerController.GetPlayersList);
 /* GET - get Players by Bout ID */
 router.get('/by_bout/:id', passport.authenticate('jwt', {session: false}), playerController.GetPlayersByBout);
 
+/* GET - get Players by Bout ID */
+router.get('/by_tourney/:id', playerController.GetPlayersByTourney);
+
 /* POST - processes the add player */
 router.post('/add/:boutnum', passport.authenticate('jwt', {session: false}), playerController.ProcessAddPlayer);
 

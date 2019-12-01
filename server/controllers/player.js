@@ -17,25 +17,70 @@ module.exports.GetPlayersList = (req, res, next) => {
   });
 };
 
-module.exports.GetPlayersByBout = (req, res, next) => {
-  let boutId = req.params.id;
-  // find all
-  playerModel.find({bouts: {'$elemMatch': {boutId : boutId}}}, (err, playersList) => {
+module.exports.GetPlayersByTourney = (req, res, next) => {
+  let tourneyId = req.params.id;
+  let name = 1;
+
+  boutModel.findOne({ number: name, tourneyId: tourneyId }, (err, bout) => {
     if (err) {
       return console.error(err);
     } else {
-      res.json({
-        success: true,
-        msg: "Players List Displayed Successfully",
-        playersList: playersList,
-        user: req.user
-      });
+      // find all
+      playerModel.find(
+        { bouts: { $elemMatch: { boutId: bout._id } } },(err, playersList) => {
+          if (err) {
+            return console.error(err);
+          } else {
+            res.json({
+              success: true,
+              msg: "Players List Displayed Successfully",
+              playersList: playersList,
+              user: req.user
+            });
+          }
+        }
+      );
     }
   });
+  // find all
+  // playerModel.find(
+  //   { bouts: { $elemMatch: { boutId: boutId } } },
+  //   (err, playersList) => {
+  //     if (err) {
+  //       return console.error(err);
+  //     } else {
+  //       res.json({
+  //         success: true,
+  //         msg: "Players List Displayed Successfully",
+  //         playersList: playersList,
+  //         user: req.user
+  //       });
+  //     }
+  //   }
+  // );
+};
+
+module.exports.GetPlayersByBout = (req, res, next) => {
+  let boutId = req.params.id;
+  // find all
+  playerModel.find(
+    { bouts: { $elemMatch: { boutId: boutId } } },
+    (err, playersList) => {
+      if (err) {
+        return console.error(err);
+      } else {
+        res.json({
+          success: true,
+          msg: "Players List Displayed Successfully",
+          playersList: playersList,
+          user: req.user
+        });
+      }
+    }
+  );
 };
 
 module.exports.ProcessAddPlayer = (req, res, next) => {
-
   const boutNum = req.params.boutnum;
 
   // new
@@ -51,28 +96,32 @@ module.exports.ProcessAddPlayer = (req, res, next) => {
       return console.error(err);
     } else {
       // find all players by bout
-      playerModel.find({ boutId: newPlayer.bouts[boutNum].boutId}, (err, playersList) => {
-        if (err) {
-          return console.error(err);
-        } else {
-          // if number of players in the bout is equal maxNumOfPlayers => return
-          if (playersList.length == bout.maxNumOfPlayers) {
-            res.json({ success: false, msg: "The Bout is Full" });
+      playerModel.find(
+        { boutId: newPlayer.bouts[boutNum].boutId },
+        (err, playersList) => {
+          if (err) {
+            return console.error(err);
           } else {
-            // add new player
-            newPlayer.save(err => {
-              if (err) {
-                console.log(err);
-                res.end(err);
-              } else {
-                res.json({ success: true, msg: "Successfully Added New Player" });
-              }
-            });
+            // if number of players in the bout is equal maxNumOfPlayers => return
+            if (playersList.length == bout.maxNumOfPlayers) {
+              res.json({ success: false, msg: "The Bout is Full" });
+            } else {
+              // add new player
+              newPlayer.save(err => {
+                if (err) {
+                  console.log(err);
+                  res.end(err);
+                } else {
+                  res.json({
+                    success: true,
+                    msg: "Successfully Added New Player"
+                  });
+                }
+              });
+            }
           }
         }
-      });
-
-
+      );
     }
   });
 };
