@@ -27,6 +27,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { AllTourneysComponent } from './pages/all-tourneys/all-tourneys.component';
 import { ViewTourneyComponent } from './pages/view-tourney/view-tourney.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { MailSentComponent } from './pages/contact/mail-sent/mail-sent.component';
 
 export function jwtTokenGetter() {
   return localStorage.getItem('id_token');
@@ -51,7 +52,8 @@ export function jwtTokenGetter() {
     AboutComponent,
     AllTourneysComponent,
     ViewTourneyComponent,
-    ContactComponent
+    ContactComponent,
+    MailSentComponent
   ],
   imports: [
     BrowserModule,
