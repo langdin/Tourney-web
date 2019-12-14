@@ -85,15 +85,14 @@ module.exports.performLogout = (req, res, next) => {
 
 
 module.exports.editUser = (req, res, next) => {
-  let id = req.params.id;
   let updatedUser = User({
-    _id: id,
+    _id: req.body._id,
     username: req.body.username,
     email: req.body.email,
     displayName: req.body.displayName
   });
 
-  User.update({ _id: id }, updatedUser, err => {
+  User.update({ _id: req.body._id }, updatedUser, err => {
     if (err) {
       console.log(err);
       res.end(err);

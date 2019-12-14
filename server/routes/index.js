@@ -8,6 +8,12 @@ let indexController = require('../controllers/index');
 /* POST - processes the Login Page */
 router.post('/login', indexController.processLoginPage);
 
+/* GET - get user data */
+router.get('/user/:id', indexController.getUser);
+
+/* POST - processes the Register Page */
+router.post('/user/edit', indexController.editUser);
+
 /* POST - processes the Register Page */
 router.post('/register', indexController.processRegisterPage);
 

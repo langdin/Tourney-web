@@ -16,6 +16,7 @@ import { AllTourneysComponent } from './pages/all-tourneys/all-tourneys.componen
 import { ViewTourneyComponent } from './pages/view-tourney/view-tourney.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { MailSentComponent } from './pages/contact/mail-sent/mail-sent.component';
+import { MyinfoComponent } from './pages/auth/myinfo/myinfo.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'all_tourneys', component: AllTourneysComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'my-info', component: MyinfoComponent},
 
   {path: 'mail_sent', component: MailSentComponent},
 
