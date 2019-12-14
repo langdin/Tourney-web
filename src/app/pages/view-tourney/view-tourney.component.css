@@ -15,17 +15,20 @@
   border-bottom: 1px solid black;
   height: 6em;
   display: flex;
-  flex-wrap: nowrap
+  flex-wrap: nowrap;
 }
 
 .name {
   align-self: flex-end;
   flex-grow: 4;
+  padding-left: 1em;
 }
 
 .score {
   align-self: flex-end;
   flex-grow: 1;
+  text-align: right;
+  padding-right: 1em;
 }
 
 .right_border {
@@ -66,4 +69,3 @@
 .margin-box-7 {
   height: 45em;
 }
-
