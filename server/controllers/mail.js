@@ -16,7 +16,7 @@ module.exports.sendMail = (req, res, next) => {
     from: req.body.mail,
     to: 'webcore.comp313@gmail.com',
     subject: req.body.subject,
-    text: 'From ' + req.body.name + ': ' + req.body.text
+    text: 'From ' + req.body.name + ': ' + req.body.message
   };
 
   transporter.sendMail(mailOptions, function(error, info){
