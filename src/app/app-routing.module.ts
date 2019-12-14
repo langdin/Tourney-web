@@ -14,11 +14,13 @@ import { BoutDeleteComponent } from './pages/bout/bout-delete/bout-delete.compon
 import { AboutComponent } from './pages/about/about.component';
 import { AllTourneysComponent } from './pages/all-tourneys/all-tourneys.component';
 import { ViewTourneyComponent } from './pages/view-tourney/view-tourney.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'about', component: AboutComponent},
+  {path: 'contact', component: ContactComponent},
   {path: 'all_tourneys', component: AllTourneysComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
