@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "angular-bootstrap-datetimepicker": "^3.0.0",
+    "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.4",
@@ -24,6 +25,7 @@
     "moment": "^2.24.0",
     "mongoose": "^5.7.7",
     "morgan": "~1.9.0",
+    "nodemailer": "^6.4.2",
     "nodemon": "^1.19.3",
     "open-iconic": "^1.1.1",
     "passport": "^0.4.0",

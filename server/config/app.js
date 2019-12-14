@@ -18,6 +18,10 @@ let passportLocal = require('passport-local');
 let localStrategy = passportLocal.Strategy;
 let flash = require('connect-flash');
 
+// email
+const bodyParser = require("body-parser");
+const nodemailer = require("nodemailer");
+
 // database setup
 let mongoose = require('mongoose');
 let DB = require('./db');
@@ -35,6 +39,7 @@ let indexRouter = require('../routes/index');
 let playerRouter = require('../routes/player');
 let boutRouter = require('../routes/bout');
 let tourneyRouter = require('../routes/tourney');
+let mailRouter = require('../routes/mail');
 
 
 let app = express();
@@ -51,6 +56,7 @@ app.use(express.static(path.join(__dirname, '../../public')));
 app.use(express.static(path.join(__dirname, '../../node_modules')));
 
 app.use(cors());
+app.use(bodyParser.json());
 
 // setup express-session
 app.use(session({
@@ -101,6 +107,7 @@ app.use('/api', indexRouter);
 app.use('/players', playerRouter);
 app.use('/bouts', boutRouter);
 app.use('/tourneys', tourneyRouter);
+app.use('/sendmail', mailRouter);
 //app.use('/api/contact-list', passport.authenticate('jwt', {session: false}), contactRouter);
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/index.html'));
