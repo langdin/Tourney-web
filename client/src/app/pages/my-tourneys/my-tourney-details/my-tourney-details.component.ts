@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MyTourneysService } from 'src/app/services/my-tourneys.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Tourney } from 'src/app/models/tourney';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-my-tourney-details',
@@ -12,7 +13,7 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./my-tourney-details.component.css']
 })
 export class MyTourneyDetailsComponent implements OnInit {
-  title: string;
+  @Input() title: string;
   tourney: Tourney;
   currentUser: User;
   tourneyId: string;
@@ -20,7 +21,8 @@ export class MyTourneyDetailsComponent implements OnInit {
   ddNum: string;
   ddStatus: string;
   //
-  disabled: boolean;
+  form: FormControl;
+  @Input() isDisabled: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -32,14 +34,12 @@ export class MyTourneyDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn();
-    this.disabled = false;
     this.tourney = new Tourney();
     this.tourney.description = '';
     this.tourneyId = this.activatedRoute.snapshot.params.id;
-    this.title = this.activatedRoute.snapshot.data.title;
+    //this.title = this.activatedRoute.snapshot.data.title;
     if (this.title === 'Edit Tourney') {
       this.getTourney();
-      this.disabled = true;
     }
     this.ddNum = 'Select Number';
     this.ddStatus = 'Select Status';
@@ -58,6 +58,7 @@ export class MyTourneyDetailsComponent implements OnInit {
     if (this.isNameEmpty()) {
       return;
     }
+    console.log('next');
     this.tourney.ownerId = this.currentUser['id'];
     this.tourney.numberOfPlayers = +this.ddNum;
     this.tourney.status = this.ddStatus;
