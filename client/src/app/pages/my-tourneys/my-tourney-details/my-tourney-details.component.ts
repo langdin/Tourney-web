@@ -36,24 +36,29 @@ export class MyTourneyDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn();
-    this.tourney = new Tourney();
-    this.tourney.description = '';
     //this.tourneyId = this.activatedRoute.snapshot.params.id;
     //this.title = this.activatedRoute.snapshot.data.title;
     // if (this.title === 'Edit Tourney') {
     //   this.getTourney();
     // }
-    this.ddNum = 'Select Number';
-    this.ddStatus = 'Select Status';
+    this.clearForm();
   }
 
   public getTourney(id) {
     this.tourneyService.getTourney(id).subscribe(data => {
       if (data.success) {
         this.tourney = data.tourney;
+        this.ddStatus = this.tourney.status.toString();
         this.ddNum = this.tourney.numberOfPlayers.toString();
       }
     });
+  }
+
+  public clearForm() {
+    this.tourney = new Tourney();
+    this.tourney.description = '';
+    this.ddNum = 'Select Number';
+    this.ddStatus = 'Select Status';
   }
 
   private onDetailsPageSubmit() {

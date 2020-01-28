@@ -5,7 +5,7 @@
     data-target="#modalDetails"
     class="btn btn-light"
     role="button"
-    (click)="callTourneyDetails('Add Tourney', false)"
+    (click)="tourneyDetails.clearForm(); callTourneyDetails('Add Tourney', false)"
   >
     <i class="fa fa-plus-circle"></i> Add a tourney
   </a>
@@ -40,7 +40,7 @@
                 data-toggle="modal"
                 data-target="#modalDetails"
                 class="btn btn-secondary btn-block"
-                (click)="callTourneyDetails('Edit Tourney', true); tourneyDetails.getTourney(tourney._id)"
+                (click)="tourneyDetails.clearForm(); callTourneyDetails('Edit Tourney', true); tourneyDetails.getTourney(tourney._id)"
 
               >
                 <i class="fas fa-pencil-alt"></i>
