@@ -33,8 +33,6 @@ const routes: Routes = [
   {path: 'view_tourney/:id', component: ViewTourneyComponent},
 
   {path: 'my_tourneys', component: MyTourneysComponent, canActivate: [AuthGuard]},
-  {path: 'my_tourneys/add', component: MyTourneyDetailsComponent, data: {title: 'Add Tourney'}, canActivate: [AuthGuard]},
-  {path: 'my_tourneys/edit/:id', component: MyTourneyDetailsComponent, data: {title: 'Edit Tourney'}, canActivate: [AuthGuard]},
   {path: 'my_tourneys/delete/:id', component: MyTourneyDeleteComponent, canActivate: [AuthGuard]},
 
   {path: 'manage_tourney/:id', component: ManageTourneyComponent, canActivate: [AuthGuard]},

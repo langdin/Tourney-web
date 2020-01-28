@@ -112,127 +112,116 @@
       </div>
       <div class="modal-body">
         <div class="justify-content-center">
-          <div class="">
-            <form
-              #form="ngForm"
-              autocomplete="off"
-              class="form"
-            >
-              <fieldset class="form-group">
-                <label for="NameTextField">Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="NameTextField"
-                  placeholder="Enter Tourney Name"
-                  name="name"
-                  [(ngModel)]="tourney.name"
-                  value="{{ tourney.name }}"
-                  required
-                  #name="ngModel"
-                />
-                <span
-                  class="badge badge-danger"
-                  *ngIf="name.errors?.required && name.touched"
-                >
-                  Tourney name is required
-                </span>
-              </fieldset>
-              <fieldset class="form-group">
-                <label for="DescriptionTextField">Description</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="DescriptionTextField"
-                  placeholder="Enter Description"
-                  name="description"
-                  [(ngModel)]="tourney.description"
-                  value="{{ tourney.description }}"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <div class="dropdown">
-                  <button
-                    class="btn btn-light btn-block dropdown-toggle"
-                    type="button"
-                    id="dropdownMenuButtonStatus"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    {{ ddStatus }}
-                  </button>
-                  <div
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
-                  >
-                    <a
-                      class="dropdown-item"
-                      (click)="selectStatus('Not Active')"
-                      >Not Active</a
-                    >
-                    <a class="dropdown-item" (click)="selectStatus('Active')"
-                      >Active</a
-                    >
-                    <a class="dropdown-item" (click)="selectStatus('Completed')"
-                      >Completed</a
-                    >
-                  </div>
-                </div>
-              </fieldset>
-              <fieldset class="form-group">
-                <label>Number of Participants</label>
-                <div class="dropdown">
-                  <button
-                    [disabled]="isDisabled"
-                    class="btn btn-light btn-block dropdown-toggle"
-                    type="button"
-                    id="dropdownMenuButtonNumOfPlayers"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    {{ ddNum }}
-                  </button>
-                  <div
-                    class="dropdown-menu text-center"
-                    aria-labelledby="dropdownMenuButton"
-                  >
-                    <a class="dropdown-item" (click)="selectNumOfPlayers(4)"
-                      >4</a
-                    >
-                    <a class="dropdown-item" (click)="selectNumOfPlayers(8)"
-                      >8</a
-                    >
-                    <a class="dropdown-item" (click)="selectNumOfPlayers(16)"
-                      >16</a
-                    >
-                  </div>
-                </div>
-                <span class="badge badge-warning">
-                  Number of participants cannot be modified afterwards
-                </span>
-              </fieldset>
-              <fieldset class="modal-footer">
+          <form #form="ngForm" autocomplete="off" class="form">
+            <fieldset class="form-group">
+              <label for="NameTextField">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="NameTextField"
+                placeholder="Enter Tourney Name"
+                name="name"
+                [(ngModel)]="tourney.name"
+                value="{{ tourney.name }}"
+                required
+                #name="ngModel"
+              />
+              <span
+                class="badge badge-danger"
+                *ngIf="name.errors?.required && name.touched"
+              >
+                Tourney name is required
+              </span>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="DescriptionTextField">Description</label>
+              <input
+                type="text"
+                class="form-control"
+                id="DescriptionTextField"
+                placeholder="Enter Description"
+                name="description"
+                [(ngModel)]="tourney.description"
+                value="{{ tourney.description }}"
+              />
+            </fieldset>
+            <fieldset class="form-group">
+              <div class="dropdown">
                 <button
+                  class="btn btn-light btn-block dropdown-toggle"
                   type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal"
+                  id="dropdownMenuButtonStatus"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
                 >
-                  Cancel
+                  {{ ddStatus }}
                 </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" (click)="selectStatus('Not Active')"
+                    >Not Active</a
+                  >
+                  <a class="dropdown-item" (click)="selectStatus('Active')"
+                    >Active</a
+                  >
+                  <a class="dropdown-item" (click)="selectStatus('Completed')"
+                    >Completed</a
+                  >
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="form-group">
+              <label>Number of Participants</label>
+              <div class="dropdown">
                 <button
-                  type="submit"
-                  class="btn btn-primary"
-                  data-dismiss="modal"
-                  (click)="onDetailsPageSubmit()"
-                  [disabled]="form.invalid || ddNum ==='Select Number' || ddStatus === 'Select Status'"
+                  [disabled]="isDisabled"
+                  class="btn btn-light btn-block dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButtonNumOfPlayers"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
                 >
-                  {{ title }}
+                  {{ ddNum }}
                 </button>
-              </fieldset>
-            </form>
-          </div>
+                <div
+                  class="dropdown-menu text-center"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <a class="dropdown-item" (click)="selectNumOfPlayers(4)">4</a>
+                  <a class="dropdown-item" (click)="selectNumOfPlayers(8)">8</a>
+                  <a class="dropdown-item" (click)="selectNumOfPlayers(16)"
+                    >16</a
+                  >
+                </div>
+              </div>
+              <span class="badge badge-warning">
+                Number of participants cannot be modified afterwards
+              </span>
+            </fieldset>
+            <fieldset class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                data-dismiss="modal"
+                (click)="onDetailsPageSubmit()"
+                [disabled]="
+                  form.invalid ||
+                  ddNum === 'Select Number' ||
+                  ddStatus === 'Select Status'
+                "
+              >
+                {{ title }}
+              </button>
+            </fieldset>
+          </form>
         </div>
       </div>
     </div>
