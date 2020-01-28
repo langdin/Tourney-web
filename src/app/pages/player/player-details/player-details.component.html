@@ -65,9 +65,8 @@
     </div>
   </div> -->
 
-
-  <div
-  class="modal fade"
+<div
+  class="modal fade text-center"
   id="modalDetails"
   tabindex="-1"
   role="dialog"
@@ -78,7 +77,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title text-primary" id="exampleModalLabel">
-          <i class="fas fa-exclamation-triangle"></i> {{ title }}
+          <i class="far fa-address-card"></i> {{ title }}
         </h4>
         <button
           type="button"
@@ -126,14 +125,14 @@
                 #num="ngModel"
               />
               <span
-              class="badge badge-danger"
-              *ngIf="num.errors?.required && num.touched"
+                class="badge badge-danger"
+                *ngIf="num.errors?.required && num.touched"
               >
                 Number of points is required
               </span>
               <span
-              class="badge badge-danger && num.touched"
-              *ngIf="num.value < 0"
+                class="badge badge-danger && num.touched"
+                *ngIf="num.value < 0"
               >
                 Number of points can not be a negative number
               </span>

@@ -57,7 +57,7 @@ export class MyTourneyDetailsComponent implements OnInit {
   public clearForm() {
     this.tourney = new Tourney();
     this.tourney.description = '';
-    this.ddNum = 'Select Number';
+    this.ddNum = 'Select Number Of Participants';
     this.ddStatus = 'Select Status';
   }
 
