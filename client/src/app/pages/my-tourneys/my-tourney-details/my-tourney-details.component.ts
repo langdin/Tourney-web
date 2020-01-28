@@ -14,6 +14,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class MyTourneyDetailsComponent implements OnInit {
   @Input() title: string;
+  @Input() isDisabled: boolean;
+  @Input() tId: string;
+
   tourney: Tourney;
   currentUser: User;
   tourneyId: string;
@@ -22,7 +25,6 @@ export class MyTourneyDetailsComponent implements OnInit {
   ddStatus: string;
   //
   form: FormControl;
-  @Input() isDisabled: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -36,17 +38,17 @@ export class MyTourneyDetailsComponent implements OnInit {
     this.isLoggedIn();
     this.tourney = new Tourney();
     this.tourney.description = '';
-    this.tourneyId = this.activatedRoute.snapshot.params.id;
+    //this.tourneyId = this.activatedRoute.snapshot.params.id;
     //this.title = this.activatedRoute.snapshot.data.title;
-    if (this.title === 'Edit Tourney') {
-      this.getTourney();
-    }
+    // if (this.title === 'Edit Tourney') {
+    //   this.getTourney();
+    // }
     this.ddNum = 'Select Number';
     this.ddStatus = 'Select Status';
   }
 
-  private getTourney() {
-    this.tourneyService.getTourney(this.tourneyId).subscribe(data => {
+  public getTourney(id) {
+    this.tourneyService.getTourney(id).subscribe(data => {
       if (data.success) {
         this.tourney = data.tourney;
         this.ddNum = this.tourney.numberOfPlayers.toString();
