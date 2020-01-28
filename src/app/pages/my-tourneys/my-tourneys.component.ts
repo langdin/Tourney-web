@@ -26,6 +26,7 @@ export class MyTourneysComponent implements OnInit {
 
   title: string;
   isDisabled: boolean;
+  editTourneyId: string;
 
   mySubscription: any;
 
@@ -95,9 +96,10 @@ export class MyTourneysComponent implements OnInit {
     this.modalBtn = 'Delete';
   }
 
-  private callTourneyDetails(title: string, dis: boolean) {
+  private callTourneyDetails(title: string, dis: boolean, id: string) {
     this.title = title;
     this.isDisabled = dis;
+    this.editTourneyId = id;
   }
 
   // tslint:disable-next-line: use-life-cycle-interface

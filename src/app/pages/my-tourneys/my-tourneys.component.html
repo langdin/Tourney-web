@@ -40,7 +40,8 @@
                 data-toggle="modal"
                 data-target="#modalDetails"
                 class="btn btn-secondary btn-block"
-                (click)="callTourneyDetails('Edit Tourney', true)"
+                (click)="callTourneyDetails('Edit Tourney', true); tourneyDetails.getTourney(tourney._id)"
+
               >
                 <i class="fas fa-pencil-alt"></i>
               </a>
@@ -112,6 +113,6 @@
         </div>
       </div>
     </div>
+    <app-my-tourney-details title="{{ title }}" [isDisabled]="isDisabled" #tourneyDetails></app-my-tourney-details>
   </div>
 </div>
-<app-my-tourney-details title="{{ title }}" [isDisabled]="isDisabled"></app-my-tourney-details>
