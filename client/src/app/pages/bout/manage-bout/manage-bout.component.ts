@@ -71,6 +71,7 @@ export class ManageBoutComponent implements OnInit {
     } else {
       this.ddNames[index] = chosen.name;
     }
+    console.log(this.ddNames);
   }
 
   public getBout() {
@@ -100,7 +101,6 @@ export class ManageBoutComponent implements OnInit {
           this.ddNames.fill('Winner of the Tournament');
         }
 
-        console.log(this.players);
         if (this.players.length === 2 && this.boutObj.maxNumOfPlayers === this.players.length) {
           this.btnText = 'Confirm Tournament Winner';
         }
@@ -143,22 +143,24 @@ export class ManageBoutComponent implements OnInit {
       }
     });
 
-    console.log(this.ddNames);
     this.players.forEach(player => {
       if (this.ddNames.includes(player.name)) {
-        // if next bout ID is empty and user picked all winners for the bout
-        if (this.winners.length === this.players.length / 2 && this.nextBoutId === '') {
-          // proceed
-          this.proceedToNextBout();
-        } else {
-          // else go to next bout
-          this.router.navigate(['/manage_bout/' + this.nextBoutId]);
-        }
+
       }
     });
+    // if havent chosen winners
+    if (this.ddNames.filter(x => x === 'Pick a winner').length === this.players.length) {
+      return;
+    }
 
-
-    // console.log(this.winners);
+    // if next bout ID is empty and user picked all winners for the bout
+    if (this.winners.length === this.players.length / 2 && this.nextBoutId === '') {
+      // proceed
+      this.proceedToNextBout();
+    } else {
+      // else go to next bout
+      this.router.navigate(['/manage_bout/' + this.nextBoutId]);
+    }
   }
 
 
