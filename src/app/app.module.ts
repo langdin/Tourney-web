@@ -9,7 +9,7 @@ import { BasePageComponent } from './partials/base-page/base-page.component';
 import { FlashMessagesModule, FlashMessagesService } from 'angular2-flash-messages';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Route Guards
 import { AuthGuard } from './guards/auth.guard';

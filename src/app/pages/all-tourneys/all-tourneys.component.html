@@ -13,7 +13,7 @@
             'text-warning': tourney.status === 'Completed',
             'text-secondary': tourney.status === 'Not Active'
           }">{{ tourney.status }}</p>
-          <a routerLink="/view_tourney/{{ tourney._id }}" class="btn btn-secondary float-right">Check</a>
+          <a routerLink="/view_tourney/{{ tourney._id }}" class="btn btn-secondary float-right"><i class="fas fa-eye"></i></a>
         </div>
       </div>
     </div>

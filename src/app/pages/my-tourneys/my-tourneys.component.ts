@@ -4,7 +4,7 @@ import { Tourney } from 'src/app/models/tourney';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { BoutService } from 'src/app/services/bout.service';
 
 @Component({
@@ -24,13 +24,29 @@ export class MyTourneysComponent implements OnInit {
   modalBody: string;
   modalBtn: string;
 
+  title: string;
+  isDisabled: boolean;
+
+  mySubscription: any;
+
   constructor(
     private tourneysService: MyTourneysService,
     private boutService: BoutService,
     private authService: AuthService,
     private flashMessage: FlashMessagesService,
     private router: Router
-  ) { }
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute =  () => {
+      return false;
+    };
+
+    this.mySubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+      }
+    });
+  }
 
   ngOnInit() {
     this.currentUser = new User();
@@ -77,5 +93,17 @@ export class MyTourneysComponent implements OnInit {
     this.modalHeader = 'Are you sure?';
     this.modalBody = 'This action cannot be undone';
     this.modalBtn = 'Delete';
+  }
+
+  private callTourneyDetails(title: string, dis: boolean) {
+    this.title = title;
+    this.isDisabled = dis;
+  }
+
+  // tslint:disable-next-line: use-life-cycle-interface
+  ngOnDestroy() {
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
   }
 }
