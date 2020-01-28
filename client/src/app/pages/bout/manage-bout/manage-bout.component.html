@@ -11,7 +11,9 @@
         class="btn btn-light"
         role="button"
         *ngIf="players.length != boutObj.maxNumOfPlayers"
-        (click)="playerDetails.clearForm(); callPlayerDetails('Add Participant')"
+        (click)="
+          playerDetails.clearForm(); callPlayerDetails('Add Participant')
+        "
       >
         <i class="fa fa-plus-circle"></i> Add participant
       </a>
@@ -30,8 +32,15 @@
                   {{ player.name }}
                 </span>
                 <a
-                  routerLink="/players/edit/{{ boutId }}/{{ player._id }}"
+                  data-toggle="modal"
+                  data-target="#modalDetails"
+                  role="button"
                   class="badge badge-secondary text-light edit"
+                  (click)="
+                    playerDetails.clearForm();
+                    callPlayerDetails('Edit Participant');
+                    playerDetails.getPlayer(player._id)
+                  "
                 >
                   Edit
                 </a>
@@ -124,4 +133,8 @@
     </div>
   </div>
 </div>
-<app-player-details title={{title}} [boutId]=boutId #playerDetails></app-player-details>
+<app-player-details
+  title="{{ title }}"
+  [boutId]="boutId"
+  #playerDetails
+></app-player-details>
