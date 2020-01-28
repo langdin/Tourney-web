@@ -5,7 +5,9 @@
     data-target="#modalDetails"
     class="btn btn-light"
     role="button"
-    (click)="tourneyDetails.clearForm(); callTourneyDetails('Add Tourney', false)"
+    (click)="
+      tourneyDetails.clearForm(); callTourneyDetails('Add Tourney', false)
+    "
   >
     <i class="fa fa-plus-circle"></i> Add a tourney
   </a>
@@ -17,42 +19,50 @@
           *ngFor="let tourney of tourneys; let i = index"
         >
           <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">{{ tourney.name }}</h5>
-              <h6
-                class="card-subtitle mb-2"
-                [ngClass]="{
-                  'text-success': tourney.status === 'Active',
-                  'text-warning': tourney.status === 'Completed',
-                  'text-secondary': tourney.status === 'Not Active'
-                }"
-              >
-                {{ tourney.status }}
-              </h6>
-              <p class="card-text">{{ tourney.description }}</p>
-              <a
-                routerLink="/manage_tourney/{{ tourney._id }}"
-                class="btn btn-secondary btn-block"
-              >
-                <i class="fas fa-tools"></i>
-              </a>
-              <a
-                data-toggle="modal"
-                data-target="#modalDetails"
-                class="btn btn-secondary btn-block text-white"
-                (click)="tourneyDetails.clearForm(); callTourneyDetails('Edit Tourney', true); tourneyDetails.getTourney(tourney._id)"
+            <div class="card-body m-1">
+              <div class="text">
+                <h4 class="card-title">{{ tourney.name }}</h4>
+                <h6
+                  class="card-subtitle mb-2"
+                  [ngClass]="{
+                    'text-success': tourney.status === 'Active',
+                    'text-warning': tourney.status === 'Completed',
+                    'text-secondary': tourney.status === 'Not Active'
+                  }"
+                >
+                  {{ tourney.status }}
+                </h6>
+                <p class="card-text">{{ tourney.description }}</p>
+              </div>
 
-              >
-                <i class="fas fa-pencil-ruler"></i>
-              </a>
-              <a
-                data-toggle="modal"
-                data-target="#modalConfirm"
-                class="btn btn-secondary btn-block text-light"
-                (click)="getId(tourney._id)"
-              >
-                <i class="fas fa-trash"></i>
-              </a>
+              <div class="buttons">
+                <a
+                  routerLink="/manage_tourney/{{ tourney._id }}"
+                  class="btn btn-secondary btn-block"
+                >
+                  <i class="fas fa-tools"></i>
+                </a>
+                <a
+                  data-toggle="modal"
+                  data-target="#modalDetails"
+                  class="btn btn-secondary btn-block text-white"
+                  (click)="
+                    tourneyDetails.clearForm();
+                    callTourneyDetails('Edit Tourney', true);
+                    tourneyDetails.getTourney(tourney._id)
+                  "
+                >
+                  <i class="fas fa-pencil-ruler"></i>
+                </a>
+                <a
+                  data-toggle="modal"
+                  data-target="#modalConfirm"
+                  class="btn btn-secondary btn-block text-light"
+                  (click)="getId(tourney._id)"
+                >
+                  <i class="fas fa-trash"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -113,6 +123,10 @@
         </div>
       </div>
     </div>
-    <app-my-tourney-details title="{{ title }}" [isDisabled]="isDisabled" #tourneyDetails></app-my-tourney-details>
+    <app-my-tourney-details
+      title="{{ title }}"
+      [isDisabled]="isDisabled"
+      #tourneyDetails
+    ></app-my-tourney-details>
   </div>
 </div>

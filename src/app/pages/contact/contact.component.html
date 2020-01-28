@@ -36,7 +36,7 @@
               class="badge badge-danger"
               *ngIf="emailTxt.errors?.required && emailTxt.touched"
             >
-              Subject is required
+              Email is required
             </span>
           </fieldset>
         <fieldset class="form-group">
@@ -50,12 +50,6 @@
             required
             #subjectTxt="ngModel"
           />
-          <span
-            class="badge badge-danger"
-            *ngIf="subjectTxt.errors?.required && subjectTxt.touched"
-          >
-            Subject is required
-          </span>
         </fieldset>
         <fieldset class="form-group">
             <textarea
@@ -72,7 +66,7 @@
               class="badge badge-danger"
               *ngIf="messageTxt.errors?.required && messageTxt.touched"
             >
-              Subject is required
+              Message is required
             </span>
           </fieldset>
           <fieldset class="form-group text-center">
