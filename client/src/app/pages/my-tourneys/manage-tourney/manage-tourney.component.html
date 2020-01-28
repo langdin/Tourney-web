@@ -11,12 +11,14 @@
       <i class="fa fa-plus-circle"></i> Add First Bout
     </button>
     <div class="row">
-        <div class="card mt-3 mb-3 col-md-4" *ngFor="let bout of bouts">
+        <div class="col-md-4 mt-3 mb-3" *ngFor="let bout of bouts">
+          <div class="card" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">Round {{ bout.number }}</h5>
               <a routerLink="/manage_bout/{{ bout._id }}" class="btn btn-primary mr-1">Go</a>
               <a routerLink="/manage_bout/delete/{{ tourneyId }}/{{ bout._id }}" class="btn btn-danger">Delete</a>
             </div>
+          </div>
         </div>
         <div class="col-md-12 text-center">
           <a routerLink="/my_tourneys" class="btn btn-secondary mx-1"
