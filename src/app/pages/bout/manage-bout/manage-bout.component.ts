@@ -13,7 +13,7 @@ import { Player } from 'src/app/models/player';
 })
 export class ManageBoutComponent implements OnInit {
 
-  bout: Bout;
+  boutObj: Bout;
   boutId: string;
   players: Player[];
   // dropdown button name
@@ -29,6 +29,8 @@ export class ManageBoutComponent implements OnInit {
 
   // for reload purposes
   mySubscription: any;
+
+  title: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -52,7 +54,7 @@ export class ManageBoutComponent implements OnInit {
   ngOnInit() {
     this.nextBoutId = '';
     this.btnText = 'Confirm Winners';
-    this.bout = new Bout();
+    this.boutObj = new Bout();
     this.players = new Array<Player>();
     this.boutId = this.activatedRoute.snapshot.params.id;
     this.getBout();
@@ -71,11 +73,12 @@ export class ManageBoutComponent implements OnInit {
     }
   }
 
-  private getBout() {
+  public getBout() {
     this.boutService.getBoutById(this.boutId).subscribe(data => {
       if (data.success) {
-        this.bout = data.bout;
-        localStorage.setItem('maxNumOfPlayers', '' + this.bout.maxNumOfPlayers );
+        this.boutObj = data.bout;
+        localStorage.setItem('maxNumOfPlayers', '' + this.boutObj.maxNumOfPlayers );
+        return this.boutObj;
       } else {
         this.flashMessage.show(data.msg, {cssClass: 'alert-warning', timeOut: 3000});
         this.router.navigate(['/my_tourneys']);
@@ -88,7 +91,7 @@ export class ManageBoutComponent implements OnInit {
       if (data.success) {
         this.players = data.playersList;
         //
-        console.log(this.players);
+        //console.log(this.players);
         this.ddNames = new Array<string>(this.players.length);
         if (this.players.length > 1) {
           this.ddNames.fill('Pick a winner');
@@ -101,8 +104,8 @@ export class ManageBoutComponent implements OnInit {
         }
         this.players.forEach(player => {
 
-          if (player.bouts[this.bout.number].boutId !== '') {
-            this.nextBoutId = player.bouts[this.bout.number].boutId;
+          if (player.bouts[this.boutObj.number].boutId !== '') {
+            this.nextBoutId = player.bouts[this.boutObj.number].boutId;
             this.btnText = 'Go to the Next Round';
 
             this.ddNames = new Array<string>();
@@ -116,7 +119,7 @@ export class ManageBoutComponent implements OnInit {
   private getPlayersFromNextBout() {
     this.players.forEach(player => {
 
-      if (player.bouts[this.bout.number].boutId !== '') {
+      if (player.bouts[this.boutObj.number].boutId !== '') {
         this.ddNames.push(player.name);
         this.ddNames.push(player.name);
       }
@@ -149,9 +152,9 @@ export class ManageBoutComponent implements OnInit {
 
   private proceedToNextBout() {
     const nextBout = new Bout();
-    nextBout.number = this.bout.number + 1;
-    nextBout.maxNumOfPlayers = this.bout.maxNumOfPlayers / 2;
-    nextBout.tourneyId = this.bout.tourneyId;
+    nextBout.number = this.boutObj.number + 1;
+    nextBout.maxNumOfPlayers = this.boutObj.maxNumOfPlayers / 2;
+    nextBout.tourneyId = this.boutObj.tourneyId;
 
     // create next bout
     this.boutService.addBout(nextBout).subscribe(data => {
@@ -168,7 +171,7 @@ export class ManageBoutComponent implements OnInit {
               // success
             } else {
               this.flashMessage.show(dataP.msg, { cssClass: 'alert-danger', timeOut: 3000 });
-              this.router.navigate(['/manage_tourney/' + this.bout.tourneyId]);
+              this.router.navigate(['/manage_tourney/' + this.boutObj.tourneyId]);
             }
           });
         });
@@ -176,9 +179,13 @@ export class ManageBoutComponent implements OnInit {
 
       } else {
         this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeOut: 3000 });
-        this.router.navigate(['/manage_tourney/' + this.bout.tourneyId]);
+        this.router.navigate(['/manage_tourney/' + this.boutObj.tourneyId]);
       }
     });
+  }
+
+  private callPlayerDetails(title: string) {
+    this.title = title;
   }
 
   // tslint:disable-next-line: use-life-cycle-interface

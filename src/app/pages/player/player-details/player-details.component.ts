@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PlayerService } from 'src/app/services/player.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -15,12 +15,12 @@ import { BoutID } from 'src/app/models/boutids';
 })
 export class PlayerDetailsComponent implements OnInit {
 
-  title: string;
+  @Input() title: string;
   // player
   player: Player;
   playerId: string;
   // bout
-  boutId: string;
+  @Input() boutId: string;
   bout: Bout;
   numOfPlayers: number;
   boutNum: number; // number of current bout
@@ -36,14 +36,14 @@ export class PlayerDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.title = this.activatedRoute.snapshot.data.title;
-    this.playerId = this.activatedRoute.snapshot.params.playerid;
-    this.boutId = this.activatedRoute.snapshot.params.boutid;
+    //this.title = this.activatedRoute.snapshot.data.title;
+    // this.playerId = this.activatedRoute.snapshot.params.playerid;
+    //this.boutId = this.activatedRoute.snapshot.params.boutid;
     this.player = new Player();
     this.getBout();
-    if (this.title === 'Edit Participant') {
-      this.getPlayer();
-    }
+    // if (this.title === 'Edit Participant') {
+    //   this.getPlayer();
+    // }
   }
 
   private getPlayer() {
@@ -76,17 +76,23 @@ export class PlayerDetailsComponent implements OnInit {
         }
         this.player.points = new Array<Point>(length).fill({score: 0});
         this.player.bouts = new Array<BoutID>(length).fill({boutId: ''});
+        console.log(this.bout);
       } else {
         this.router.navigate(['/my_tourneys']);
       }
     });
   }
 
+  public clearForm() {
+    this.player = new Player();
+    this.player.points = new Array<Point>(length).fill({score: 0});
+    this.player.bouts = new Array<BoutID>(length).fill({boutId: ''});
+  }
+
   private onDetailsPageSubmit() {
     // assign current score and boutID
     this.player.points[this.boutNum] = { score: this.score };
     this.player.bouts[this.boutNum] = { boutId: this.boutId };
-
     if (this.title === 'Add Participant') {
       this.playerService.addPlayer(this.player, this.boutNum).subscribe(data => {
         if (data.success) {

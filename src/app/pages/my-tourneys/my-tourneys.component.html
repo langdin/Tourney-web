@@ -34,16 +34,16 @@
                 routerLink="/manage_tourney/{{ tourney._id }}"
                 class="btn btn-secondary btn-block"
               >
-                <i class="fas fa-pencil-ruler"></i>
+                <i class="fas fa-tools"></i>
               </a>
               <a
                 data-toggle="modal"
                 data-target="#modalDetails"
-                class="btn btn-secondary btn-block"
+                class="btn btn-secondary btn-block text-white"
                 (click)="tourneyDetails.clearForm(); callTourneyDetails('Edit Tourney', true); tourneyDetails.getTourney(tourney._id)"
 
               >
-                <i class="fas fa-pencil-alt"></i>
+                <i class="fas fa-pencil-ruler"></i>
               </a>
               <a
                 data-toggle="modal"
