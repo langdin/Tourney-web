@@ -35,7 +35,7 @@ module.exports.GetBoutById = (req, res, next) => {
 module.exports.GetBoutsByTourneyId = (req, res, next) => {
   let id = req.params.id;
   // find by tourney id
-  boutModel.find({tourneyId: id}, (err, boutList) => {
+  boutModel.find({ tourneyId: id }, (err, boutList) => {
     if (err) {
       return console.error(err);
     } else {
@@ -52,7 +52,7 @@ module.exports.GetBoutsByTourneyId = (req, res, next) => {
 module.exports.ProcessAddBout = (req, res, next) => {
   // create new
   let newBout = boutModel({
-    number:  req.body.number,
+    number: req.body.number,
     maxNumOfPlayers: req.body.maxNumOfPlayers,
     tourneyId: req.body.tourneyId
   });
@@ -62,32 +62,54 @@ module.exports.ProcessAddBout = (req, res, next) => {
       console.log(err);
       res.end(err);
     } else {
-      res.json({ success: true, bout: boutModel, msg: "Successfully Added New Bout" });
+      res.json({
+        success: true,
+        bout: boutModel,
+        msg: "Successfully Added New Bout"
+      });
     }
   });
-}
+};
 
 module.exports.PerformDelete = (req, res, next) => {
   // get id
   let id = req.params.id;
 
   // remove players in bout
-  playerModel.remove({bouts: {'$elemMatch': {boutId : id}}}, err => {
-    if(err) {
-      console.log(err);
-      res.end(err);
-    } else {
-      // then remove bout itself
-      boutModel.remove({_id: id}, (err) => {
-        if(err) {
+  playerModel.find(
+    { bouts: { $elemMatch: { boutId: id } } },
+    (err, playerList) => {
+      if (err) {
+        console.log(err);
+        res.end(err);
+      } else {
+        // then remove bout itself
+        boutModel.remove({ _id: id }, err => {
+          if (err) {
             console.log(err);
             res.end(err);
-        } else {
-            res.json({success: true, msg: 'Successfully Deleted Bout and Players of this Bout'});
-        }
-      });
+          } else {
+            playerList.forEach(player => {
+              playerModel.findOneAndUpdate(
+                { bouts: { $elemMatch: { boutId: id } } },
+                { bouts: { $elemMatch: { boutId: "" } } },
+                err => {
+                  if (err) {
+                    console.log(err);
+                    res.end(err);
+                  } else {
+                    res.json({
+                      success: true,
+                      msg: "Successfully Deleted Bout and Players of this Bout"
+                    });
+                  }
+                }
+              );
+            });
+          }
+        });
+      }
     }
-  })
+  );
   // delete
-
-}
+};
