@@ -88,7 +88,7 @@
 </div> -->
 
 <div
-  class="modal fade"
+  class="modal fade text-center"
   id="modalDetails"
   tabindex="-1"
   role="dialog"
@@ -99,7 +99,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title text-primary" id="exampleModalLabel">
-          <i class="fas fa-exclamation-triangle"></i> {{ title }}
+          <i class="fas fa-edit"></i> {{ title }}
         </h4>
         <button
           type="button"
@@ -171,7 +171,6 @@
               </div>
             </fieldset>
             <fieldset class="form-group">
-              <label>Number of Participants</label>
               <div class="dropdown">
                 <button
                   [disabled]="isDisabled"
@@ -214,7 +213,7 @@
                 (click)="onDetailsPageSubmit()"
                 [disabled]="
                   form.invalid ||
-                  ddNum === 'Select Number' ||
+                  ddNum === 'Select Number Of Participants' ||
                   ddStatus === 'Select Status'
                 "
               >
