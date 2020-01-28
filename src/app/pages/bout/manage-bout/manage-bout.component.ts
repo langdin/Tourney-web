@@ -89,9 +89,10 @@ export class ManageBoutComponent implements OnInit {
   private getPlayers() {
     this.playerService.getPlayersByBout(this.boutId).subscribe(data => {
       if (data.success) {
+        // get all players from current bout
         this.players = data.playersList;
         //
-        //console.log(this.players);
+        // populate dropdowns
         this.ddNames = new Array<string>(this.players.length);
         if (this.players.length > 1) {
           this.ddNames.fill('Pick a winner');
@@ -99,7 +100,8 @@ export class ManageBoutComponent implements OnInit {
           this.ddNames.fill('Winner of the Tournament');
         }
 
-        if (this.players.length === 2) {
+        console.log(this.players);
+        if (this.players.length === 2 && this.boutObj.maxNumOfPlayers === this.players.length) {
           this.btnText = 'Confirm Tournament Winner';
         }
         this.players.forEach(player => {
@@ -112,6 +114,7 @@ export class ManageBoutComponent implements OnInit {
             this.getPlayersFromNextBout();
           }
         });
+        console.log(this.nextBoutId);
       }
     });
   }

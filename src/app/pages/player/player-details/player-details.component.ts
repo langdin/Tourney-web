@@ -75,8 +75,8 @@ export class PlayerDetailsComponent implements OnInit {
             length = 5;
             break;
         }
-        this.player.points = new Array<Point>(length).fill({score: 0});
-        this.player.bouts = new Array<BoutID>(length).fill({boutId: ''});
+        this.player.points = new Array<Point>(length).fill({ score: 0 });
+        this.player.bouts = new Array<BoutID>(length).fill({ boutId: '' });
       } else {
         this.router.navigate(['/my_tourneys']);
       }
@@ -85,8 +85,20 @@ export class PlayerDetailsComponent implements OnInit {
 
   public clearForm() {
     this.player = new Player();
-    this.player.points = new Array<Point>(length).fill({score: 0});
-    this.player.bouts = new Array<BoutID>(length).fill({boutId: ''});
+    let length = 0;
+    switch (this.bout.maxNumOfPlayers) {
+      case 4:
+        length = 3;
+        break;
+      case 8:
+        length = 4;
+        break;
+      case 16:
+        length = 5;
+        break;
+    }
+    this.player.points = new Array<Point>(length).fill({ score: 0 });
+    this.player.bouts = new Array<BoutID>(length).fill({ boutId: '' });
   }
 
   private onDetailsPageSubmit() {
@@ -96,14 +108,14 @@ export class PlayerDetailsComponent implements OnInit {
     if (this.title === 'Add Participant') {
       this.playerService.addPlayer(this.player, this.boutNum).subscribe(data => {
         if (data.success) {
-          this.flashMessage.show(data.msg, {cssClass: 'alert-success', timeOut: 3000});
+          this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeOut: 3000 });
           this.router.navigate(['/manage_bout/' + this.boutId]);
         }
       });
     } else if (this.title === 'Edit Participant') {
       this.playerService.updatePlayer(this.player).subscribe(data => {
         if (data.success) {
-          this.flashMessage.show(data.msg, {cssClass: 'alert-success', timeOut: 3000});
+          this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeOut: 3000 });
           this.router.navigate(['/manage_bout/' + this.boutId]);
         }
       });
