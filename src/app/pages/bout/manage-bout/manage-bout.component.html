@@ -113,7 +113,8 @@
         </a>
         <button
           class="btn btn-success"
-          *ngIf="this.players.length === this.boutObj.maxNumOfPlayers"
+
+          *ngIf="this.players.length === this.boutObj.maxNumOfPlayers && boutObj.maxNumOfPlayers > 1"
           (click)="confirmWinners()"
         >
           {{ btnText }}
@@ -125,7 +126,7 @@
             this.winners.length < 2 &&
             this.clicked &&
             (this.ddNames[0] === this.ddNames[1] ||
-              this.ddNames[2] === this.ddNames[3])
+              this.ddNames[2] === this.ddNames[3]) && boutObj.maxNumOfPlayers > 1
           "
           >Please, choose winners.</span
         >
