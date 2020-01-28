@@ -46,8 +46,9 @@ export class PlayerDetailsComponent implements OnInit {
     // }
   }
 
-  private getPlayer() {
-    this.playerService.getPlayersById(this.playerId).subscribe(data => {
+  public getPlayer(id: string) {
+    console.log('get player');
+    this.playerService.getPlayersById(id).subscribe(data => {
       if (data.success) {
         this.player = data.player;
         this.score = this.player.points[this.boutNum].score;
@@ -76,7 +77,6 @@ export class PlayerDetailsComponent implements OnInit {
         }
         this.player.points = new Array<Point>(length).fill({score: 0});
         this.player.bouts = new Array<BoutID>(length).fill({boutId: ''});
-        console.log(this.bout);
       } else {
         this.router.navigate(['/my_tourneys']);
       }
