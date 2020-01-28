@@ -38,18 +38,18 @@ export class ManageBoutComponent implements OnInit {
     private boutService: BoutService,
     private flashMessage: FlashMessagesService,
     private router: Router
-    ) {
-      this.router.routeReuseStrategy.shouldReuseRoute =  () => {
-        return false;
-      };
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
 
-      this.mySubscription = this.router.events.subscribe((event) => {
-        if (event instanceof NavigationEnd) {
-          // Trick the Router into believing it's last link wasn't previously loaded
-          this.router.navigated = false;
-        }
-      });
-     }
+    this.mySubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+      }
+    });
+  }
 
   ngOnInit() {
     this.nextBoutId = '';
@@ -77,10 +77,10 @@ export class ManageBoutComponent implements OnInit {
     this.boutService.getBoutById(this.boutId).subscribe(data => {
       if (data.success) {
         this.boutObj = data.bout;
-        localStorage.setItem('maxNumOfPlayers', '' + this.boutObj.maxNumOfPlayers );
+        localStorage.setItem('maxNumOfPlayers', '' + this.boutObj.maxNumOfPlayers);
         return this.boutObj;
       } else {
-        this.flashMessage.show(data.msg, {cssClass: 'alert-warning', timeOut: 3000});
+        this.flashMessage.show(data.msg, { cssClass: 'alert-warning', timeOut: 3000 });
         this.router.navigate(['/my_tourneys']);
       }
     });
@@ -104,6 +104,9 @@ export class ManageBoutComponent implements OnInit {
         if (this.players.length === 2 && this.boutObj.maxNumOfPlayers === this.players.length) {
           this.btnText = 'Confirm Tournament Winner';
         }
+        if (this.boutObj.maxNumOfPlayers === 1) {
+          return;
+        }
         this.players.forEach(player => {
 
           if (player.bouts[this.boutObj.number].boutId !== '') {
@@ -114,7 +117,6 @@ export class ManageBoutComponent implements OnInit {
             this.getPlayersFromNextBout();
           }
         });
-        console.log(this.nextBoutId);
       }
     });
   }
@@ -141,14 +143,21 @@ export class ManageBoutComponent implements OnInit {
       }
     });
 
-    // if next bout ID is empty and user picked all winners for the bout
-    if (this.winners.length === this.players.length / 2 && this.nextBoutId === '') {
-      // proceed
-      this.proceedToNextBout();
-    } else {
-      // else go to next bout
-      this.router.navigate(['/manage_bout/' + this.nextBoutId]);
-    }
+    console.log(this.ddNames);
+    this.players.forEach(player => {
+      if (this.ddNames.includes(player.name)) {
+        // if next bout ID is empty and user picked all winners for the bout
+        if (this.winners.length === this.players.length / 2 && this.nextBoutId === '') {
+          // proceed
+          this.proceedToNextBout();
+        } else {
+          // else go to next bout
+          this.router.navigate(['/manage_bout/' + this.nextBoutId]);
+        }
+      }
+    });
+
+
     // console.log(this.winners);
   }
 
