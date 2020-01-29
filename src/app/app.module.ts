@@ -22,7 +22,6 @@ import { MyTourneyDeleteComponent } from './pages/my-tourneys/my-tourney-delete/
 import { ManageTourneyComponent } from './pages/my-tourneys/manage-tourney/manage-tourney.component';
 import { ManageBoutComponent } from './pages/bout/manage-bout/manage-bout.component';
 import { PlayerDetailsComponent } from './pages/player/player-details/player-details.component';
-import { BoutDeleteComponent } from './pages/bout/bout-delete/bout-delete.component';
 import { AboutComponent } from './pages/about/about.component';
 import { AllTourneysComponent } from './pages/all-tourneys/all-tourneys.component';
 import { ViewTourneyComponent } from './pages/view-tourney/view-tourney.component';
@@ -49,7 +48,6 @@ export function jwtTokenGetter() {
     ManageTourneyComponent,
     ManageBoutComponent,
     PlayerDetailsComponent,
-    BoutDeleteComponent,
     AboutComponent,
     AllTourneysComponent,
     ViewTourneyComponent,
