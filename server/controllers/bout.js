@@ -71,45 +71,52 @@ module.exports.ProcessAddBout = (req, res, next) => {
   });
 };
 
-module.exports.PerformDelete = (req, res, next) => {
-  // get id
-  let id = req.params.id;
+// module.exports.PerformDelete = (req, res, next) => {
+//   // get id
+//   let id = req.params.id;
 
-  // remove players in bout
-  playerModel.find(
-    { bouts: { $elemMatch: { boutId: id } } },
-    (err, playerList) => {
-      if (err) {
-        console.log(err);
-        res.end(err);
-      } else {
-        // then remove bout itself
-        boutModel.remove({ _id: id }, err => {
-          if (err) {
-            console.log(err);
-            res.end(err);
-          } else {
-            playerList.forEach(player => {
-              playerModel.findOneAndUpdate(
-                { bouts: { $elemMatch: { boutId: id } } },
-                { bouts: { $elemMatch: { boutId: "" } } },
-                err => {
-                  if (err) {
-                    console.log(err);
-                    res.end(err);
-                  } else {
-                    res.json({
-                      success: true,
-                      msg: "Successfully Deleted Bout and Players of this Bout"
-                    });
-                  }
-                }
-              );
-            });
-          }
-        });
-      }
-    }
-  );
-  // delete
-};
+//   // remove players in bout
+//   playerModel.find(
+//     { bouts: { $elemMatch: { boutId: id } } },
+//     (err, playerList) => {
+//       if (err) {
+//         console.log(err);
+//         res.end(err);
+//       } else {
+//         // then remove bout itself
+//         boutModel.remove({ _id: id }, err => {
+//           if (err) {
+//             console.log(err);
+//             res.end(err);
+//           } else {
+//             playerList.forEach(player => {
+//               let index = player.bouts.map(e => {return e.boutId} ).indexOf(id);
+//               player.bouts[index].boutId = '';
+//               if (index === 0) {
+//                 return;
+//               }
+//               playerModel.findOneAndUpdate(
+//                 { bouts: { $elemMatch: { boutId: id } } },
+//                 player,
+//                 err => {
+//                   if (err) {
+//                     console.log(err);
+//                     res.end(err);
+//                   }
+//                 }
+//               )
+
+//               res.json({
+//                 success: true,
+//                 msg: "Successfully Deleted Bout and Players of this Bout"
+//               });
+//             });
+
+//             //res.json({list: playerList, });
+//           }
+//         });
+//       }
+//     }
+//   );
+//   // delete
+// };

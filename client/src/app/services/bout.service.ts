@@ -42,10 +42,10 @@ export class BoutService {
     return this.httpClient.post(this.endpoint + 'add', bout, this.httpOptions);
   }
 
-  public deleteBout(boutId: string): Observable<any> {
-    this.loadToken();
-    return this.httpClient.get(this.endpoint + 'delete/' + boutId, this.httpOptions);
-  }
+  // public deleteBout(boutId: string): Observable<any> {
+  //   this.loadToken();
+  //   return this.httpClient.get(this.endpoint + 'delete/' + boutId, this.httpOptions);
+  // }
 
   private loadToken() {
     const token = localStorage.getItem('id_token');
