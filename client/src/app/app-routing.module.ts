@@ -10,7 +10,6 @@ import { MyTourneyDeleteComponent } from './pages/my-tourneys/my-tourney-delete/
 import { ManageTourneyComponent } from './pages/my-tourneys/manage-tourney/manage-tourney.component';
 import { ManageBoutComponent } from './pages/bout/manage-bout/manage-bout.component';
 import { PlayerDetailsComponent } from './pages/player/player-details/player-details.component';
-import { BoutDeleteComponent } from './pages/bout/bout-delete/bout-delete.component';
 import { AboutComponent } from './pages/about/about.component';
 import { AllTourneysComponent } from './pages/all-tourneys/all-tourneys.component';
 import { ViewTourneyComponent } from './pages/view-tourney/view-tourney.component';
@@ -38,7 +37,6 @@ const routes: Routes = [
   {path: 'manage_tourney/:id', component: ManageTourneyComponent, canActivate: [AuthGuard]},
 
   {path: 'manage_bout/:id', component: ManageBoutComponent, canActivate: [AuthGuard]},
-  {path: 'manage_bout/delete/:tid/:bid', component: BoutDeleteComponent, canActivate: [AuthGuard]},
 
   {path: 'players/add/:boutid', component: PlayerDetailsComponent, data: {title: 'Add Participant'}, canActivate: [AuthGuard]},
   {path: 'players/edit/:boutid/:playerid', component: PlayerDetailsComponent, data: {title: 'Edit Participant'}, canActivate: [AuthGuard]}
