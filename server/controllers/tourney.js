@@ -108,32 +108,35 @@ module.exports.PerformDelete = (req, res, next) => {
   // get id
   let id = req.params.id;
 
-  boutModel.find({ tourneyId: id }, (err, boutList) => {
+  tourneyModel.remove({ _id: id }, err => {
     if (err) {
-      return console.error(err + " find bout by tourney err");
+      console.log(err);
+      res.end(err);
     } else {
-      boutList.forEach(bout => {
-        playerModel.remove({ bouts: { $elemMatch: { boutId: bout._id } } }, (err, playersList) => {
-            if (err) {
-              return console.error(err + " delete players by bout err");
-            } else {
-              boutModel.remove({ tourneyId: id }, err => {
+      boutModel.find({ tourneyId: id }, (err, boutList) => {
+        if (err) {
+          return console.error(err + " find bout by tourney err");
+        } else {
+          if (boutList.length === 0) {
+            res.json({ success: true, msg: "Successfully Deleted Tourney" });
+          }
+          boutList.forEach(bout => {
+            playerModel.remove({ bouts: { $elemMatch: { boutId: bout._id } } }, (err, playersList) => {
                 if (err) {
-                  return console.error(err + " delete bouts err");
+                  return console.error(err + " delete players by bout err");
                 } else {
-                  tourneyModel.remove({ _id: id }, err => {
+                  boutModel.remove({ tourneyId: id }, err => {
                     if (err) {
-                      console.log(err);
-                      res.end(err);
+                      return console.error(err + " delete bouts err");
                     } else {
-                      res.json({ success: true, msg: "Successfully Deleted Tourney" });
+                      res.json({ success: true, msg: "Successfully Deleted Tourney with Bouts and Players" });
                     }
                   });
                 }
-              });
-            }
-          }
-        );
+              }
+            );
+          });
+        }
       });
     }
   });

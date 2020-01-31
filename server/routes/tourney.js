@@ -21,6 +21,6 @@ router.get('/:id', tourneyController.GetTourneyById);
 router.post('/edit/:id', passport.authenticate('jwt', {session: false}), tourneyController.ProcessEditTourney);
 
 /* GET - processes the delete tourney */
-router.get('/delete/:id', passport.authenticate('jwt', {session: false}), tourneyController.PerformDelete);
+router.get('/delete/:id',  tourneyController.PerformDelete);
 
 module.exports = router;

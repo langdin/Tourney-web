@@ -28,6 +28,7 @@ import { ViewTourneyComponent } from './pages/view-tourney/view-tourney.componen
 import { ContactComponent } from './pages/contact/contact.component';
 import { MailSentComponent } from './pages/contact/mail-sent/mail-sent.component';
 import { MyinfoComponent } from './pages/auth/myinfo/myinfo.component';
+import { ModalDeleteComponent } from './partials/modal-delete/modal-delete.component';
 
 export function jwtTokenGetter() {
   return localStorage.getItem('id_token');
@@ -53,7 +54,8 @@ export function jwtTokenGetter() {
     ViewTourneyComponent,
     ContactComponent,
     MailSentComponent,
-    MyinfoComponent
+    MyinfoComponent,
+    ModalDeleteComponent
   ],
   imports: [
     BrowserModule,
