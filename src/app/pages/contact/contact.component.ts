@@ -32,7 +32,7 @@ export class ContactComponent implements OnInit {
       } else {
         this.flashMessage.show('Couldn\'t send your message', {cssClass: 'alert-warning', timeOut: 3000});
       }
-    })
+    });
   }
 
 }
