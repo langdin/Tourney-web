@@ -11,7 +11,7 @@ export class BoutService {
   private user: User;
   private authToken: any = null;
 
-  private endpoint = 'http://localhost:3000/bouts/';
+  private endpoint = 'http://localhost:3000/api/bouts/';
 
   private httpOptions = {
     headers: new HttpHeaders({

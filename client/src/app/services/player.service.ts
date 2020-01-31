@@ -11,7 +11,7 @@ export class PlayerService {
   private user: User;
   private authToken: any = null;
 
-  private endpoint = 'http://localhost:3000/players/';
+  private endpoint = 'http://localhost:3000/api/players/';
 
   private httpOptions = {
     headers: new HttpHeaders({

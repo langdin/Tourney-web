@@ -11,7 +11,7 @@ export class MyTourneysService {
   private user: User;
   private authToken: any = null;
 
-  private endpoint = 'http://localhost:3000/tourneys/';
+  private endpoint = 'http://localhost:3000/api/tourneys/';
 
   private httpOptions = {
     headers: new HttpHeaders({

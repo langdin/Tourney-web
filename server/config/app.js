@@ -104,10 +104,10 @@ passport.use(strategy);
 
 
 app.use('/api', indexRouter);
-app.use('/players', playerRouter);
-app.use('/bouts', boutRouter);
-app.use('/tourneys', tourneyRouter);
-app.use('/sendmail', mailRouter);
+app.use('/api/players', playerRouter);
+app.use('/api/bouts', boutRouter);
+app.use('/api/tourneys', tourneyRouter);
+app.use('/api/sendmail', mailRouter);
 //app.use('/api/contact-list', passport.authenticate('jwt', {session: false}), contactRouter);
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/index.html'));
