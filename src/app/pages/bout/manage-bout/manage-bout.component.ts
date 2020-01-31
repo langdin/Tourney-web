@@ -58,7 +58,6 @@ export class ManageBoutComponent implements OnInit {
     this.players = new Array<Player>();
     this.boutId = this.activatedRoute.snapshot.params.id;
     this.getBout();
-    this.getPlayers();
     localStorage.setItem('boutId', this.boutId);
     this.winners = new Array<Player>();
     this.clicked = false;
@@ -71,7 +70,7 @@ export class ManageBoutComponent implements OnInit {
     } else {
       this.ddNames[index] = chosen.name;
     }
-    console.log(this.ddNames);
+    // console.log(this.ddNames);
   }
 
   public getBout() {
@@ -79,6 +78,7 @@ export class ManageBoutComponent implements OnInit {
       if (data.success) {
         this.boutObj = data.bout;
         localStorage.setItem('maxNumOfPlayers', '' + this.boutObj.maxNumOfPlayers);
+        this.getPlayers();
         return this.boutObj;
       } else {
         this.flashMessage.show(data.msg, { cssClass: 'alert-warning', timeOut: 3000 });

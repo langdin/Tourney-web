@@ -1,4 +1,4 @@
-<div class="container mt-3 mb-5">
+<div class="container mt-3 mb-5 pb-5">
   <div class="text-center">
     <h3>Round {{ boutObj.number }}</h3>
     <p>Maximum number of participants: {{ boutObj.maxNumOfPlayers }}</p>
@@ -18,8 +18,8 @@
         <i class="fa fa-plus-circle"></i> Add participant
       </a>
     </div>
-    <div class="row">
-      <div class="col-md-6 player-p-m">
+    <div class="row bout">
+      <div class="col-md-6 col-6 player-p-m">
         <div
           *ngFor="let player of players; let odd = odd; let last = last"
           [ngClass]="{ right_border: odd }"
@@ -54,7 +54,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6 no-p-m">
+      <div class="col-md-6 col-6 no-p-m">
         <div
           *ngFor="
             let player of players;
