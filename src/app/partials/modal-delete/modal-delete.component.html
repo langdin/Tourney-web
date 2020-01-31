@@ -33,9 +33,9 @@
               Cancel
             </button>
             <a
-              class="btn btn-danger"
+              class="btn btn-danger text-white"
               data-dismiss="modal"
-              routerLink="/my_tourneys/delete/{{ tourneyId }}"
+              (click)="deleteTurney()"
               >Delete</a
             >
           </div>
