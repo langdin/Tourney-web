@@ -65,7 +65,7 @@ export class ManageTourneyComponent implements OnInit {
     });
   }
 
-  private addFirstBout() {
+  public addFirstBout() {
     const bout = new Bout();
     bout.number = this.bouts.length + 1;
     bout.maxNumOfPlayers = this.tourney.numberOfPlayers;

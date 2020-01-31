@@ -11,7 +11,8 @@ export class BoutService {
   private user: User;
   private authToken: any = null;
 
-  private endpoint = 'http://localhost:3000/api/bouts/';
+  // private endpoint = 'http://localhost:3000/api/bouts/';
+  private endpoint = 'https://tourney-digital.herokuapp.com/api/bouts/';
 
   private httpOptions = {
     headers: new HttpHeaders({

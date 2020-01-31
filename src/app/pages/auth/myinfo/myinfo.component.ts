@@ -33,7 +33,7 @@ export class MyinfoComponent implements OnInit {
     });
   }
 
-  private updateUser() {
+  public updateUser() {
     this.authService.editUser(this.user).subscribe(data => {
       if (data.success) {
         this.flashMessage.show('Successfully Updated Your Presonal Info', {cssClass: 'alert-success', timeOut: 3000});

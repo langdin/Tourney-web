@@ -11,7 +11,8 @@ export class PlayerService {
   private user: User;
   private authToken: any = null;
 
-  private endpoint = 'http://localhost:3000/api/players/';
+  // private endpoint = 'http://localhost:3000/api/players/';
+  private endpoint = 'https://tourney-digital.herokuapp.com/api/players';
 
   private httpOptions = {
     headers: new HttpHeaders({

@@ -71,7 +71,7 @@ export class MyTourneysComponent implements OnInit {
     return result;
   }
 
-  private getId(id: string) {
+  public getId(id: string) {
     this.tourneyId = id;
     console.log(this.tourneyId);
   }
@@ -82,10 +82,9 @@ export class MyTourneysComponent implements OnInit {
   //   this.modalBtn = 'Delete';
   // }
 
-  private callTourneyDetails(title: string, dis: boolean, id: string) {
+  public callTourneyDetails(title: string, dis: boolean) {
     this.title = title;
     this.isDisabled = dis;
-    this.editTourneyId = id;
   }
 
   // tslint:disable-next-line: use-life-cycle-interface

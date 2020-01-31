@@ -131,7 +131,7 @@ export class ManageBoutComponent implements OnInit {
     });
   }
 
-  private confirmWinners() {
+  public confirmWinners() {
     // button clicked
     this.clicked = true;
     // empty winners array
@@ -198,7 +198,7 @@ export class ManageBoutComponent implements OnInit {
     });
   }
 
-  private callPlayerDetails(title: string) {
+  public callPlayerDetails(title: string) {
     this.title = title;
   }
 
