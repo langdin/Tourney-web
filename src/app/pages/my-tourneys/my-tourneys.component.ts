@@ -55,7 +55,6 @@ export class MyTourneysComponent implements OnInit {
     this.isLoggedIn();
     this.userId = this.currentUser['id'];
     this.displayUserTourneys();
-    this.restModal();
   }
 
   private displayUserTourneys() {
@@ -74,27 +73,14 @@ export class MyTourneysComponent implements OnInit {
 
   private getId(id: string) {
     this.tourneyId = id;
-    this.tourneys.forEach(tourney => {
-      if (tourney['_id'] === this.tourneyId) {
-        this.boutService.getBoutsByTourney(this.tourneyId).subscribe(data => {
-          if (data.boutList.length !== 0) {
-            console.log(data.boutList);
-            this.modalHeader = 'Warning';
-            this.modalBody = 'You have to delete all bouts from this Tourney first.';
-            this.modalBtn = 'Ok';
-          } else {
-            this.restModal();
-          }
-        });
-      }
-    });
+    console.log(this.tourneyId);
   }
 
-  private restModal() {
-    this.modalHeader = 'Are you sure?';
-    this.modalBody = 'This action cannot be undone';
-    this.modalBtn = 'Delete';
-  }
+  // private restModal() {
+  //   this.modalHeader = 'Are you sure?';
+  //   this.modalBody = 'This action cannot be undone';
+  //   this.modalBtn = 'Delete';
+  // }
 
   private callTourneyDetails(title: string, dis: boolean, id: string) {
     this.title = title;

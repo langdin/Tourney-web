@@ -20,10 +20,11 @@ export class MyTourneyDeleteComponent implements OnInit {
 
   ngOnInit() {
     this.tourneyId = this.activatedRoute.snapshot.params.id;
-    this.deleteSurvey();
+    this.deleteTurney();
   }
 
-  private deleteSurvey(): void {
+  private deleteTurney(): void {
+    console.log('detele');
     this.tourneysService.deleteTourney(this.tourneyId).subscribe(data => {
       // deleted
       if (data.success) {
