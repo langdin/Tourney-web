@@ -71,9 +71,19 @@ module.exports.ProcessAddBout = (req, res, next) => {
   });
 };
 
-// module.exports.PerformDelete = (req, res, next) => {
-//   // get id
-//   let id = req.params.id;
+module.exports.PerformDelete = (req, res, next) => {
+  // get id
+  let id = req.params.id;
+  boutModel.remove({_id: id}, (err) => {
+    if(err) {
+        console.log(err);
+        res.end(err);
+    }
+    else {
+      res.json({success: true, msg: 'Successfully Deleted Bout'});
+    }
+});
+}
 
 //   // remove players in bout
 //   playerModel.find(

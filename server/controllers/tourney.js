@@ -1,4 +1,6 @@
 let tourneyModel = require("../models/tourney");
+let boutModel = require("../models/bout");
+let playerModel = require("../models/player");
 
 module.exports.GetTourneysList = (req, res, next) => {
   // find all
@@ -40,7 +42,7 @@ module.exports.ProcessAddTourney = (req, res, next) => {
     description: req.body.description,
     status: req.body.status,
     numberOfPlayers: req.body.numberOfPlayers,
-    ownerId: req.body.ownerId,
+    ownerId: req.body.ownerId
   });
 
   // save
@@ -83,7 +85,7 @@ module.exports.ProcessEditTourney = (req, res, next) => {
     description: req.body.description,
     status: req.body.status,
     numberOfPlayers: req.body.numberOfPlayers,
-    ownerId: req.body.ownerId,
+    ownerId: req.body.ownerId
   });
 
   // update
@@ -101,20 +103,49 @@ module.exports.ProcessEditTourney = (req, res, next) => {
   });
 };
 
-// TODO DEEP DELETE
-// IF DELETE TOURNEY DELETE ALL BOUTS AND PLAYERS IN IT
+
 module.exports.PerformDelete = (req, res, next) => {
   // get id
   let id = req.params.id;
 
-  // delete
-  tourneyModel.remove({_id: id}, (err) => {
-      if(err) {
-          console.log(err);
-          res.end(err);
-      }
-      else {
-        res.json({success: true, msg: 'Successfully Deleted Tourney'});
-      }
+  boutModel.find({ tourneyId: id }, (err, boutList) => {
+    if (err) {
+      return console.error(err + " find bout by tourney err");
+    } else {
+      boutList.forEach(bout => {
+        playerModel.remove({ bouts: { $elemMatch: { boutId: bout._id } } }, (err, playersList) => {
+            if (err) {
+              return console.error(err + " delete players by bout err");
+            } else {
+              boutModel.remove({ tourneyId: id }, err => {
+                if (err) {
+                  return console.error(err + " delete bouts err");
+                } else {
+                  tourneyModel.remove({ _id: id }, err => {
+                    if (err) {
+                      console.log(err);
+                      res.end(err);
+                    } else {
+                      res.json({ success: true, msg: "Successfully Deleted Tourney" });
+                    }
+                  });
+                }
+              });
+            }
+          }
+        );
+      });
+    }
   });
-}
+  // return;
+
+  // // delete
+  // tourneyModel.remove({ _id: id }, err => {
+  //   if (err) {
+  //     console.log(err);
+  //     res.end(err);
+  //   } else {
+  //     res.json({ success: true, msg: "Successfully Deleted Tourney" });
+  //   }
+  // });
+};
