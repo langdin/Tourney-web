@@ -14,6 +14,7 @@ import { ViewTourneyComponent } from './pages/view-tourney/view-tourney.componen
 import { ContactComponent } from './pages/contact/contact.component';
 import { MailSentComponent } from './pages/contact/mail-sent/mail-sent.component';
 import { MyinfoComponent } from './pages/auth/myinfo/myinfo.component';
+import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -36,7 +37,10 @@ const routes: Routes = [
   {path: 'manage_bout/:id', component: ManageBoutComponent, canActivate: [AuthGuard]},
 
   {path: 'players/add/:boutid', component: PlayerDetailsComponent, data: {title: 'Add Participant'}, canActivate: [AuthGuard]},
-  {path: 'players/edit/:boutid/:playerid', component: PlayerDetailsComponent, data: {title: 'Edit Participant'}, canActivate: [AuthGuard]}
+  {path: 'players/edit/:boutid/:playerid', component: PlayerDetailsComponent, data: {title: 'Edit Participant'}, canActivate: [AuthGuard]},
+
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: '**', component: PagenotfoundComponent}
 ];
 
 @NgModule({
