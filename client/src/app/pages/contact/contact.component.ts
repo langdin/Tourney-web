@@ -25,7 +25,7 @@ export class ContactComponent implements OnInit {
   ngOnInit() {
   }
 
-  private sendMail() {
+  public sendMail() {
     this.mailService.sendMail(this.name, this.email, this.subject, this.message).subscribe(data => {
       if (data.success) {
         this.router.navigate(['/mail_sent']);

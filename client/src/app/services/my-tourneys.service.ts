@@ -11,7 +11,8 @@ export class MyTourneysService {
   private user: User;
   private authToken: any = null;
 
-  private endpoint = 'http://localhost:3000/api/tourneys/';
+  // private endpoint = 'http://localhost:3000/api/tourneys/';
+  private endpoint = 'https://tourney-digital.herokuapp.com/api/tourneys/';
 
   private httpOptions = {
     headers: new HttpHeaders({

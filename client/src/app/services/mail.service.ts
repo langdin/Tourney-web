@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class MailService {
 
-  private endpoint = 'http://localhost:3000/api/sendmail/';
+  // private endpoint = 'http://localhost:3000/api/sendmail/';
+  private endpoint = 'https://tourney-digital.herokuapp.com/api/sendmail/';
 
   private httpOptions = {
     headers: new HttpHeaders({

@@ -61,7 +61,7 @@ export class MyTourneyDetailsComponent implements OnInit {
     this.ddStatus = 'Select Status';
   }
 
-  private onDetailsPageSubmit() {
+  public onDetailsPageSubmit() {
     if (this.isNameEmpty()) {
       return;
     }
@@ -94,7 +94,7 @@ export class MyTourneyDetailsComponent implements OnInit {
     }
   }
 
-  private selectStatus(status: string) {
+  public selectStatus(status: string) {
     this.ddStatus = status;
   }
 
@@ -106,11 +106,11 @@ export class MyTourneyDetailsComponent implements OnInit {
     return result;
   }
 
-  private selectNumOfPlayers(num: string) {
+  public selectNumOfPlayers(num: string) {
     this.ddNum = num;
   }
 
-  private isNameEmpty() {
+  public isNameEmpty() {
     this.tourney.name = this.tourney.name.trim();
     if (this.tourney.name.length === 0) {
       return true;

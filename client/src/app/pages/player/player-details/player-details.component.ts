@@ -101,7 +101,7 @@ export class PlayerDetailsComponent implements OnInit {
     this.player.bouts = new Array<BoutID>(length).fill({ boutId: '' });
   }
 
-  private onDetailsPageSubmit() {
+  public onDetailsPageSubmit() {
     // assign current score and boutID
     this.player.points[this.boutNum] = { score: this.score };
     this.player.bouts[this.boutNum] = { boutId: this.boutId };
