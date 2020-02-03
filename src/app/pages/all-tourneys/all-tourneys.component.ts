@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MyTourneysService } from 'src/app/services/my-tourneys.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
 import { Tourney } from 'src/app/models/tourney';
 
@@ -13,15 +11,15 @@ import { Tourney } from 'src/app/models/tourney';
 export class AllTourneysComponent implements OnInit {
 
   tourneys: Tourney[];
+  search: string;
 
   constructor(
     private tourneysService: MyTourneysService,
-    private authService: AuthService,
-    private flashMessage: FlashMessagesService,
     private router: Router
   ) { }
 
   ngOnInit() {
+    this.search = '';
     this.getTourneys();
   }
 
