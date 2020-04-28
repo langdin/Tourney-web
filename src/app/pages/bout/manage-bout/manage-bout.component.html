@@ -78,7 +78,7 @@
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    {{ddNames[i]}}
+                    {{ ddNames[i] }}
                   </button>
                   <div
                     class="dropdown-menu"
@@ -113,8 +113,10 @@
         </a>
         <button
           class="btn btn-success"
-
-          *ngIf="this.players.length === this.boutObj.maxNumOfPlayers && boutObj.maxNumOfPlayers > 1"
+          *ngIf="
+            this.players.length === this.boutObj.maxNumOfPlayers &&
+            boutObj.maxNumOfPlayers > 1
+          "
           (click)="confirmWinners()"
         >
           {{ btnText }}
@@ -126,7 +128,8 @@
             this.winners.length < 2 &&
             this.clicked &&
             (this.ddNames[0] === this.ddNames[1] ||
-              this.ddNames[2] === this.ddNames[3]) && boutObj.maxNumOfPlayers > 1
+              this.ddNames[2] === this.ddNames[3]) &&
+            boutObj.maxNumOfPlayers > 1
           "
           >Please, choose winners.</span
         >
@@ -138,4 +141,5 @@
   title="{{ title }}"
   [boutId]="boutId"
   #playerDetails
+  (getPlayers)="getBout()"
 ></app-player-details>

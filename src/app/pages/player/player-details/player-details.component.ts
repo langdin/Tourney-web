@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlayerService } from 'src/app/services/player.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -26,6 +26,7 @@ export class PlayerDetailsComponent implements OnInit {
   boutNum: number; // number of current bout
   // score in current bout for display
   score: number;
+  @Output() getPlayers: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -120,6 +121,7 @@ export class PlayerDetailsComponent implements OnInit {
         }
       });
     }
+    this.getPlayers.emit();
   }
 
 }

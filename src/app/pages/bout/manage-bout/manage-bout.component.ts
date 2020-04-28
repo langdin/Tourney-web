@@ -38,18 +38,7 @@ export class ManageBoutComponent implements OnInit {
     private boutService: BoutService,
     private flashMessage: FlashMessagesService,
     private router: Router
-  ) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => {
-      return false;
-    };
-
-    this.mySubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        // Trick the Router into believing it's last link wasn't previously loaded
-        this.router.navigated = false;
-      }
-    });
-  }
+  ) { }
 
   ngOnInit() {
     this.nextBoutId = '';
@@ -200,12 +189,5 @@ export class ManageBoutComponent implements OnInit {
 
   public callPlayerDetails(title: string) {
     this.title = title;
-  }
-
-  // tslint:disable-next-line: use-life-cycle-interface
-  ngOnDestroy() {
-    if (this.mySubscription) {
-      this.mySubscription.unsubscribe();
-    }
   }
 }

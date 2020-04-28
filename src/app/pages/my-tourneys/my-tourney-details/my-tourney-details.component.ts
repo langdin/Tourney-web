@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MyTourneysService } from 'src/app/services/my-tourneys.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -16,6 +16,7 @@ export class MyTourneyDetailsComponent implements OnInit {
   @Input() title: string;
   @Input() isDisabled: boolean;
   @Input() tId: string;
+  @Output() getTourneys: EventEmitter<any> = new EventEmitter();
 
   tourney: Tourney;
   currentUser: User;
@@ -73,10 +74,10 @@ export class MyTourneyDetailsComponent implements OnInit {
       // Add New Tourney
       this.tourneyService.addTourney(this.tourney).subscribe(data => {
         if (data.success) {
-          this.flashMessage.show(data.msg, {cssClass: 'alert-success', timeOut: 3000});
+          this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeOut: 3000 });
           this.router.navigate(['/my_tourneys']);
         } else {
-          this.flashMessage.show(data.msg, {cssClass: 'alert-danger', timeOut: 3000});
+          this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeOut: 3000 });
           this.router.navigate(['/my_tourneys/add']);
         }
       });
@@ -84,14 +85,16 @@ export class MyTourneyDetailsComponent implements OnInit {
       // Update Tourney
       this.tourneyService.updateTourney(this.tourney).subscribe(data => {
         if (data.success) {
-          this.flashMessage.show(data.msg, {cssClass: 'alert-success', timeOut: 3000});
+          this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeOut: 3000 });
           this.router.navigate(['/my_tourneys']);
         } else {
-          this.flashMessage.show(data.msg, {cssClass: 'alert-danger', timeOut: 3000});
+          this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeOut: 3000 });
           this.router.navigate(['/my_tourneys/edit/' + this.tourney._id]);
         }
       });
     }
+    this.getTourneys.emit();
+
   }
 
   public selectStatus(status: string) {
