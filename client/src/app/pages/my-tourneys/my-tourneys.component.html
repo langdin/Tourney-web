@@ -70,7 +70,10 @@
     </div>
 
     <!-- Modal -->
-    <app-modal-delete tourneyId={{this.tourneyId}}></app-modal-delete>
+    <app-modal-delete
+      tourneyId="{{ this.tourneyId }}"
+      (getTourneys)="displayUserTourneys()"
+    ></app-modal-delete>
     <!-- <div
       class="modal fade"
       id="modalConfirm"
@@ -128,6 +131,7 @@
       title="{{ title }}"
       [isDisabled]="isDisabled"
       #tourneyDetails
+      (getTourneys)="displayUserTourneys()"
     ></app-my-tourney-details>
   </div>
 </div>

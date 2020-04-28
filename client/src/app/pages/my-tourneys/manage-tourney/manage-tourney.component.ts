@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MyTourneysService } from 'src/app/services/my-tourneys.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Tourney } from 'src/app/models/tourney';
 import { BoutService } from 'src/app/services/bout.service';
 import { Bout } from 'src/app/models/bout';
@@ -25,17 +25,6 @@ export class ManageTourneyComponent implements OnInit {
     private flashMessage: FlashMessagesService,
     private router: Router
   ) {
-
-    this.router.routeReuseStrategy.shouldReuseRoute =  () => {
-      return false;
-    };
-
-    this.mySubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        // Trick the Router into believing it's last link wasn't previously loaded
-        this.router.navigated = false;
-      }
-    });
   }
 
   ngOnInit() {
@@ -80,7 +69,7 @@ export class ManageTourneyComponent implements OnInit {
         } else {
           this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeOut: 3000 });
         }
-        this.router.navigate(['/manage_tourney/' + this.tourneyId]);
+        this.getBouts();
       });
     }
   }
@@ -98,10 +87,4 @@ export class ManageTourneyComponent implements OnInit {
   // }
 
 
-  // tslint:disable-next-line: use-life-cycle-interface
-  ngOnDestroy() {
-    if (this.mySubscription) {
-      this.mySubscription.unsubscribe();
-    }
-  }
 }

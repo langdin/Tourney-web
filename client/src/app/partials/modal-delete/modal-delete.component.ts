@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { MyTourneysService } from 'src/app/services/my-tourneys.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -11,6 +11,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 export class ModalDeleteComponent implements OnInit {
 
   @Input() tourneyId: string;
+  @Output() getTourneys: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private tourneysService: MyTourneysService,
@@ -25,12 +26,13 @@ export class ModalDeleteComponent implements OnInit {
     this.tourneysService.deleteTourney(this.tourneyId).subscribe(data => {
       // deleted
       if (data.success) {
-        this.flashMessage.show(data.msg, {cssClass: 'alert-warning', timeOut: 3000});
+        this.flashMessage.show(data.msg, { cssClass: 'alert-warning', timeOut: 3000 });
       } else {
         // error
-        this.flashMessage.show('Delete Survey Failed', {cssClass: 'alert-danger', timeOut: 3000});
+        this.flashMessage.show('Delete Survey Failed', { cssClass: 'alert-danger', timeOut: 3000 });
       }
       this.router.navigate(['/my_tourneys']);
+      this.getTourneys.emit();
     });
   }
 

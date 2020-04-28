@@ -37,16 +37,16 @@ export class MyTourneysComponent implements OnInit {
     private flashMessage: FlashMessagesService,
     private router: Router
   ) {
-    this.router.routeReuseStrategy.shouldReuseRoute =  () => {
-      return false;
-    };
+    // this.router.routeReuseStrategy.shouldReuseRoute =  () => {
+    //   return false;
+    // };
 
-    this.mySubscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        // Trick the Router into believing it's last link wasn't previously loaded
-        this.router.navigated = false;
-      }
-    });
+    // this.mySubscription = this.router.events.subscribe((event) => {
+    //   if (event instanceof NavigationEnd) {
+    //     // Trick the Router into believing it's last link wasn't previously loaded
+    //     this.router.navigated = false;
+    //   }
+    // });
   }
 
   ngOnInit() {
@@ -57,8 +57,8 @@ export class MyTourneysComponent implements OnInit {
     this.displayUserTourneys();
   }
 
-  private displayUserTourneys() {
-    this.tourneysService.getUserTourneys({userId: this.userId}).subscribe(data => {
+  public displayUserTourneys() {
+    this.tourneysService.getUserTourneys({ userId: this.userId }).subscribe(data => {
       this.tourneys = data.tourneysList;
     });
   }
@@ -88,9 +88,9 @@ export class MyTourneysComponent implements OnInit {
   }
 
   // tslint:disable-next-line: use-life-cycle-interface
-  ngOnDestroy() {
-    if (this.mySubscription) {
-      this.mySubscription.unsubscribe();
-    }
-  }
+  // ngOnDestroy() {
+  //   if (this.mySubscription) {
+  //     this.mySubscription.unsubscribe();
+  //   }
+  // }
 }
