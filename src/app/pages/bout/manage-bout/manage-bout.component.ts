@@ -37,8 +37,12 @@ export class ManageBoutComponent implements OnInit {
     private playerService: PlayerService,
     private boutService: BoutService,
     private flashMessage: FlashMessagesService,
-    private router: Router
-  ) { }
+    private router: Router,
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+  }
 
   ngOnInit() {
     this.nextBoutId = '';
@@ -148,7 +152,8 @@ export class ManageBoutComponent implements OnInit {
       this.proceedToNextBout();
     } else {
       // else go to next bout
-      this.router.navigate(['/manage_bout/' + this.nextBoutId]);
+      console.log(this.nextBoutId);
+      this.router.navigateByUrl('/manage_bout/' + this.nextBoutId);
     }
   }
 
@@ -171,14 +176,15 @@ export class ManageBoutComponent implements OnInit {
           winner.bouts[nextBout.number - 1].boutId = nextBoutId;
           this.playerService.updatePlayer(winner).subscribe(dataP => {
             if (dataP.success) {
-              // success
+
+              console.log(nextBoutId);
+              this.router.navigate(['/manage_bout/' + nextBoutId]);
             } else {
               this.flashMessage.show(dataP.msg, { cssClass: 'alert-danger', timeOut: 3000 });
               this.router.navigate(['/manage_tourney/' + this.boutObj.tourneyId]);
             }
           });
         });
-        this.router.navigate(['/manage_bout/' + nextBoutId]);
 
       } else {
         this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeOut: 3000 });

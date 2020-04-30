@@ -66,7 +66,6 @@ export class MyTourneyDetailsComponent implements OnInit {
     if (this.isNameEmpty()) {
       return;
     }
-    console.log('next');
     this.tourney.ownerId = this.currentUser['id'];
     this.tourney.numberOfPlayers = +this.ddNum;
     this.tourney.status = this.ddStatus;
@@ -94,7 +93,6 @@ export class MyTourneyDetailsComponent implements OnInit {
       });
     }
     this.getTourneys.emit();
-
   }
 
   public selectStatus(status: string) {
