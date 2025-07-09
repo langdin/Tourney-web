@@ -10,6 +10,7 @@ import { User } from '../models/user';
 export class BoutService {
   private user: User;
   private authToken: any = null;
+  private test: any = null;
 
   // private endpoint = 'http://localhost:3000/api/bouts/';
   private endpoint = 'https://tourney-digital.herokuapp.com/api/bouts/';
